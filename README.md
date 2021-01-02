@@ -1,13 +1,16 @@
 # University Ranking Prediction and Recommendation
 
-<h2> Data set
+<h2> Data set:
+  
   
 ### Implementation approach  
 
-#### Algorithms used
+#### Algorithms 
+
+* Regression
 
 
-#### Tools used
+#### Tools 
 
 * Frontend: DASH/Plotly
 
