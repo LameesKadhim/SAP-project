@@ -14,3 +14,4 @@ This is a student project and It's about University ranking analysis. For this p
 * Frontend: DASH/Plotly
 
 * Backend: Flask
+
