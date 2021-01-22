@@ -1,0 +1,39 @@
+.block-caption {
+    font-size: 20px;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    color:#60a093;
+    font-style: normal
+}
+
+.text-content {
+    text-align: justify;
+    font-style: normal
+}
+
+.text-content-title {
+    font-size: 20px;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    font-style: normal
+
+}
+.avatar-container {
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.avatar {
+    width: 50%;
+    margin: 10px;
+    box-shadow: 0px 4px 5px rgb(96 160 147 / 0.4);
+    border-radius: 50%;
+}
+
+.social-link {
+font-size:30px;
+padding:5px;
+text-decoration:none;
+color: black;
+}
