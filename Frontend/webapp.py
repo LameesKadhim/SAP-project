@@ -180,7 +180,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                         
                         html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Sepideh"),
+                            html.H6("Sepideh Hosseini"),
                             html.Img(src=app.get_asset_url('Sepideh.jpg'), className='avatar'),
                             html.Div(children=[
                                 html.A(href= 'https://github.com/Sepideh-hd', className='fa fa-github social-link ', target="_blank"),

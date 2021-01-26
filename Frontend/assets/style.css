@@ -35,6 +35,10 @@
     margin: 10px;
     box-shadow: 0px 4px 5px rgb(96 160 147 / 0.4);
     border-radius: 50%;
+    height: 100;
+    width:100;
+    max-height: 110px;
+    max-width: 110px;
 }
 
 .social-link {
