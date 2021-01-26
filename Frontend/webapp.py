@@ -21,8 +21,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
 
 df1 = pd.read_csv('../Dataset/admission_predict_V1.2.csv').head()
 model = joblib.load('../Backend/model_RandF.sav')
-#model = joblib.load('../Backend/model_LR.sav')
 #----------------------------------------------------------------------------------------
+
 # Feature importance Visualization
 df = pd.read_csv('../Dataset/admission_predict_V1.2.csv')
 X = df.drop(['Chance of Admit','Serial No.'], axis=1)
@@ -33,42 +33,87 @@ importance_frame['Features'] = X.columns
 importance_frame['Importance'] = model.feature_importances_
 importance_frame = importance_frame.sort_values(by=['Importance'], ascending=True)
 
-fig = px.bar(importance_frame, y='Features', x='Importance', color='Features',orientation='h')
+importance_fig = px.bar(importance_frame, y='Features', x='Importance', color='Features',orientation='h')
 
-fig.update_layout(title='The impact of the various features on the chance of admission',
-                   xaxis_title='Importance',
-                   yaxis_title='',
-                   height=500, width = 700 )
-
+importance_fig.update_layout(title='The impact of the various features on the chance of admission',
+                            xaxis_title='Importance',
+                            yaxis_title='',
+                            height=500, width = 700 )
 #----------------------------------------------------------------------------------
+gerVSadmit_fig = px.scatter(df, x="GRE Score", 
+                                y="Chance of Admit",
+                                log_x=True,
+                                size_max=60)
+#----------------------------------------------------------------------------------
+toeflVSadmit_fig = px.scatter(df, x="TOEFL Score", 
+                                y="Chance of Admit",
+                                log_x=True,
+                                size_max=60)
+#-----------------------------------------------------------------------------------
+cgpaVSadmit = px.scatter(df, x="CGPA", 
+                            y="Chance of Admit",
+                            log_x=True, size_max=60)
+#--------------------------------------------------------------------------
+df_count = df.groupby('University Rating', as_index = False).agg('count')
+df_count ['std_count'] = df_count['LOR']
+lorVSadmit_fig = px.bar(df_count, 
+                        y='std_count',
+                        x='University Rating', 
+                        title = 'Distriution of student applications across Universities_by_rating')
+#---------------------------------------------------------------------
+df.sort_values(by=['University Rating'], inplace=True)
+df_avg =df.groupby ('University Rating', as_index=False)['Chance of Admit'].mean()
+rateVSadmit_fig=go.Figure()
+rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
+                                    y=df_avg['Chance of Admit'],
+                                    mode='lines+markers'))
+
+rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
+                                xaxis_title='University Rating',
+                                yaxis_title='Chance of Admit')
+#----------------------------------------------------------------------
+total = df_count['std_count'].sum()
+df_count['percentage'] = df_count['std_count']/total
+
+colors = ['#003f5c','#58508d','#bc5090','#ff6361','#ffa600']
+pie_fig = px.pie(df_count, 
+                values=df_count['percentage'], 
+                names='University Rating',
+                title=" Percentage of students across universities") 
+
+
+pie_fig.update_traces(hoverinfo='label+percent', textfont_size=15,
+                  textinfo='label+percent',
+                  marker=dict(colors=colors, line=dict(color='#FFFFFF', width=2)))
+#--------------------------------------------------------------------
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(style={'margin':'0'}, children=[
+    html.Div(className='container', children=[
     
     # Start Header ***********************************************
-    html.Div(style = {'background-color':'rgb(249 249 249)','padding':'10px'}, className= 'row', children=[
-        html.Div(className='two columns', children=[
-            html.Img(src=app.get_asset_url('logo.png'), style={'width':'30%'}),
+        html.Div(style = {'background-color':'rgb(249 249 249)','padding':'10px'}, className= 'row', children=[
+            html.Div(className='two columns', children=[
+                html.Img(src=app.get_asset_url('logo.png'), style={'width':'50%'}),
         ]),
 
-        html.Div(className='eight columns',style = {'text-align':'center'}, children=[
-            html.H4("Student Admission Prediction")
+            html.Div(className='eight columns',style = {'text-align':'center'}, children=[
+                html.H4("Student Admission Prediction")
         ]),
 
-        html.Div(className='two columns', style = {'text-align':'right'} , children=[
-            html.A("Github", href='https://github.com/LameesKadhim/SAP-project', target="_blank")
+            html.Div(className='two columns', style = {'text-align':'right'} , children=[
+                html.A(" Source code ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-github header-links', target="_blank"),
+                html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
         ])
     ]),
 # End Header **************************************************
-    html.Div(className='container', children=[
-            dcc.Tabs(style={'margin':'10px 0px'},children=[
 
+        dcc.Tabs(style={'margin':'10px 0px'},children=[
 
-    # Start HOME  Tab*********************************************
-
-    dcc.Tab(label='HOME', className='custom-tab',  children=[
-            html.Div(className='row', style={'text-align': 'center'}, children=[
+        # Start HOME  Tab*********************************************
+        dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
+            html.Div(className='row' , children=[
 
                 # Start Left Side *****************************
                 html.Div(className='six columns', children=[
@@ -76,18 +121,16 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                     # Student Admission Prediction DIv ************************************
                     html.Div(className='row', children=[
                         html.Label(className='block-caption',
-                                   children=['Student Admission Prediction']),
+                                   children=['Objective of the project']),
                         html.Label(className='text-content', children=[
                                    'Our university acceptance calculator can help you to find the probability of getting accepted into a particular university based on your profile, and it’s completely free. Enter your scores and GPA to see our predicted output. This output will give you a fair idea about your chances for a particular university.'
                                    ])
                     ]),
 
                 ]),
-
                 # End Left Side *****************************
 
                 # Start Right Side ***************************
-
                 html.Div(className='six columns', children=[
 
                     # LOGO
@@ -97,41 +140,33 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                     # ABOUT US
                     html.Div(className='row', children=[
-                        html.Label(className='block-caption',
-                                   children=['About Us']),
-                        html.Label(className='text-content', children=['What is SAP?']),
+                        html.Label(className='block-caption', children=['What is SAP?']),
                         html.Label(className='text-content', children=[
-                            'SAP (Student Admission Prediction) is the best place for the bachelor students to understand their chances of getting accepted into shortlisted universities.'
+                            'SAP(Student Admission Prediction) is the best place for the bachelor students to understand their chances of getting accepted into shortlisted universities'
                         ])
                     ]),
                     # About Dataset
                     html.Div(className='row', children=[
                         html.Label(className='block-caption',
                                    children=['About Dataset']),
-                        html.Label(className='text-content', children=['Where our data comes from?']),
                         html.Label(className='text-content', children=[
-                            'SAP has the comprehensive data on shortlisted universities.We rigorously analyze some of public data sets to help you understand your chances of getting accepted into shortlisted universities. Data Source: We use the dataset which is available in Link below: '
+                            'This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university. We use the dataset which is available in Link below: '
                         ])
                     ]),
 
                 ]),
 
-                    html.Div(className='row', style={'text-align': 'right'} , children=[
+                    html.Div(className='row', style={'text-align': 'right' , 'margin-down':'5px'} , children=[
                       html.A(
                            "View our dataset source link", href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv', target="_blank")
                     ]),
 
-                # End Right Side ***************************
+                # End Right Side *********************************************
             ]),
 
             # Start About Us Section *****************************************
-            html.Section(style= {'background-color':'rgb(249 249 249)',
-                                'padding':'5px 0px',
-                                'margin':'0px',
-                                'text-align':'center',
-                                'color':'#111'},
-                children=[
-                    html.H3('The Team',style={'font-style':'bold'}),
+            html.Section(className='AboutUs', children=[
+                    html.H3('Datology Team',style={'font-style':'bold'}),
                     
                     html.Div(style={'overflow': 'hidden'}, children=[
                         html.Div(style={'float': 'left','width':'20%'}, children=[
@@ -166,21 +201,21 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
 
                         html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Sepideh"),
-                            html.Img(src=app.get_asset_url('lamees.png'), className='avatar'),
+                            html.H6("Tamanna"),
+                            html.Img(src=app.get_asset_url('tamanna.jpg'), className='avatar'),
                             html.Div(children=[
-                                html.A(href= 'https://github.com/SaifAlmaliki', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/saif-almaliki-5a681376/', className='fa fa-linkedin social-link', target="_blank")
+                                html.A(href= 'https://github.com/tamanna18', className='fa fa-github social-link ', target="_blank"),
+                                html.A(href= 'https://www.linkedin.com/in/tamanna-724345189/', className='fa fa-linkedin social-link', target="_blank")
                                 
                             ])
                         ]),
 
                         html.Div(style={'float': 'left','width':'20%'}, children=[
                             html.H6("Kunal"),
-                            html.Img(src=app.get_asset_url('saif.jpg'), className='avatar'),
+                            html.Img(src=app.get_asset_url('kunal.png'), className='avatar'),
                             html.Div(children=[
-                                html.A(href= 'https://github.com/SaifAlmaliki', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/saif-almaliki-5a681376/', className='fa fa-linkedin social-link', target="_blank")
+                                html.A(href= 'https://github.com/kunalait', className='fa fa-github social-link ', target="_blank"),
+                                html.A(href= 'https://www.linkedin.com/in/kunal-2375b515a/', className='fa fa-linkedin social-link', target="_blank")
                                 
                             ])
                         ])
@@ -188,45 +223,65 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
 
         ]),
-            # dcc.Tab(label='HOME', children=[
-            #     html.Section(style= {'background-color':'rgb(249 249 249)',
-            #                         'padding':'20px',
-            #                         'margin':'0px'},
-            #                 children=[
-            #         html.H3("Objective of the project"),
-            #         html.P("Our university acceptance calculator can help you to find the probability of getting accepted into a particular university based on your profile, and it’s completely free. Enter your scores and GPA to see our predicted output. This output will give you a fair idea about your chances for a particular university")
-            #     ]),
-
-            #     html.Section(style= {'background-color':'rgb(249 249 249)',
-            #                         'padding':'20px',
-            #                         'margin':'5px 0px'},
-            #                 children=[
-            #         html.H3("What is SAP?"),
-            #         html.P("SAP(Student Admission Prediction) is the best place for the bachelor students to understand their chances of getting accepted into shortlisted universities")
-            #     ]),
-
-            #     html.Section(style= {'background-color':'rgb(249 249 249)',
-            #                         'padding':'20px',
-            #                         'margin':'5px 0px'},
-            #                 children=[
-            #         html.H3("About Dataset"),
-            #         html.P("This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university"),
-            #         html.Span("Dataset Source: "),
-            #         html.A("Click Here", href='https://www.kaggle.com/mohansacharya/graduate-admissions', target="_blank")
-            #     ])
-            # ]),  # End Home Tab **********************************
-
-            # Start DASHBOARD Tab ****************************************
-            dcc.Tab(label='DASHBOARD',  children=[
-                # Read the data frame
+        
+        # Start Dashboard Tab
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[
+            html.Div(className='row', children=[            
                 dash_table.DataTable(
                     id='table',
                     columns=[{"name": i, "id": i} for i in df1.columns],
-                    data=df1.to_dict('records'))
-            ]), # End Dashboard Tab ******************************
+                    data=df1.to_dict('records')
+                )
+            ]),
+            
+            html.Div(className='row', children=[
+                html.Div(className='six columns', children=[
+                    html.Div(className='row', children=[
+                        dcc.Graph(
+                            id='bar',
+                            figure= lorVSadmit_fig                                 
+                        )  
+                                            ]),          
+                    html.Div(className='row', children=[
+                        dcc.Graph(
+                            id='scatter1',
+                            figure= gerVSadmit_fig
+                        )
+                        
+                    ]),          
+                    html.Div(className='row', children=[
+                        dcc.Graph(
+                            id='scatter',
+                            figure= cgpaVSadmit                                
+                        )                       
+                    ])
+                ]),
+                html.Div(className='six columns', children=[                             
+                    html.Div(className='row', children=[                    
+                        dcc.Graph(
+                            id='pie',
+                            figure= pie_fig                                 
+                        )
+                                           
+                    ]),     
+                    html.Div(className='row', children=[
+                        dcc.Graph(
+                            id='scatter2',
+                            figure= toeflVSadmit_fig
+                        )
+                    ]),   
+                    html.Div(className='row', children=[
+                        dcc.Graph(
+                            id='line',
+                            figure= rateVSadmit_fig                                 
+                        )
+                    ])
+                 ]),
+            ])
+        ]), #End Dashboard Tab ******************************
 
             # Start ML Tab *********************************************
-            dcc.Tab(label='ML',  children=[
+            dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
                 
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
@@ -386,7 +441,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                     # Start Right Side ***************************
                     html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
-                        dcc.Graph(figure=fig),
+                        dcc.Graph(figure=importance_fig),
                         dcc.Graph(id = 'barGraph',style={'margin-left': '92px', 'margin-top': '37px','textAlign': 'center'})
                         
                     ])
@@ -396,8 +451,6 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         ]) # ***END TABS ****************************************
 
     ]), # End Div Container
-
-
 
 
 ])  # End Main Layout ***********************************************************

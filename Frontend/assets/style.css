@@ -6,6 +6,12 @@
     font-style: normal
 }
 
+.tabs {
+    text-align: center;
+    background-color:rgb(249 249 249);
+    padding:10px
+}
+
 .text-content {
     text-align: justify;
     font-style: normal
@@ -32,8 +38,29 @@
 }
 
 .social-link {
-font-size:30px;
-padding:5px;
-text-decoration:none;
-color: black;
+    font-size:30px;
+    padding:5px;
+    text-decoration:none;
+    color: black;
+}
+
+.header-links{
+    font-size: 16px;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.AboutUs {
+    background-color:rgb(249 249 249);
+    padding:5px 0px;
+    margin: 0px;
+    text-align:center;
+    color:#111
+}
+
+.tab-icon {
+    font-size:20px;
+    padding:10px;
+    color: black;
 }
