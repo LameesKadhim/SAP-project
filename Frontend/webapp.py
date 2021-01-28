@@ -39,12 +39,21 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
+<<<<<<< HEAD
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
                                 log_x=True,
                                 size_max=60)
 #----------------------------------------------------------------------------------
+=======
+#----------------------------------------------------------------------------------
+gerVSadmit_fig = px.scatter(df, x="GRE Score", 
+                                y="Chance of Admit",
+                                log_x=True,
+                                size_max=60)
+#----------------------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 toeflVSadmit_fig = px.scatter(df, x="TOEFL Score", 
                                 y="Chance of Admit",
                                 log_x=True,
@@ -53,7 +62,11 @@ toeflVSadmit_fig = px.scatter(df, x="TOEFL Score",
 cgpaVSadmit = px.scatter(df, x="CGPA", 
                             y="Chance of Admit",
                             log_x=True, size_max=60)
+<<<<<<< HEAD
 #-----------------------------------------------------------------------------------
+=======
+#--------------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 df_count = df.groupby('University Rating', as_index = False).agg('count')
 df_count ['std_count'] = df_count['LOR']
 lorVSadmit_fig = px.bar(df_count, 
@@ -71,7 +84,11 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
+<<<<<<< HEAD
 #---------------------------------------------------------------------
+=======
+#----------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
 
@@ -107,10 +124,17 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                 html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
         ])
     ]),
+<<<<<<< HEAD
 # End Header ********************************************************
 
         dcc.Tabs(style={'margin':'10px 0px'},children=[
 
+=======
+    # End Header **************************************************
+
+    dcc.Tabs(style={'margin':'10px 0px'},children=[
+
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
         # Start HOME  Tab*********************************************
         dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
             html.Div(className='row' , children=[
@@ -280,8 +304,35 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
         ]), #End Dashboard Tab ******************************
 
+<<<<<<< HEAD
             # Start ML Tab *********************************************
             dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
+=======
+        # Start ML tab
+        dcc.Tab(label=' ML', className='tab-icon ', children=[
+            html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
+            html.Div(className='row', style={'margin':'15px'} , children=[ 
+                html.Div(className='twelve columns', children=[
+                    html.P('Our task is to predict the student admission probability using a regression task'),
+                    html.P('Steps to build our model:'),
+                    html.Ul(id='model-list', children=[
+                        html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
+                        html.Li('Apply different machine learning regression models'),
+                        html.Li('Select the best model'),
+                        html.Li('Save the model')
+                        ]),
+                    html.P('In our task we used Random Forest Regressor model from scikit-learn library and obtain 85% score ' )
+                
+               ])   
+           ]),
+           html.Div(className='row', children=[
+               dcc.Graph(figure=importance_fig)
+               ])
+        ]),
+        #End ML Tab
+        # Start Prediction Tab *********************************************
+        dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                 
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
@@ -429,6 +480,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                     # Start Right Side ***************************
                     html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
+<<<<<<< HEAD
                         
                         #Admission prediction Text
                         html.Div(children=[
@@ -442,11 +494,15 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                         
                         # Prediction bar 
                         dcc.Graph(id = 'barGraph',className='prediction-bar')
+=======
+                        dcc.Graph(id = 'barGraph',style={'margin-left': '92px', 'margin-top': '37px','textAlign': 'center'})
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                         
                     ])
                 ])
             ]), # ***END ML TAB****************************************
 
+        
         ]) # ***END TABS ****************************************
 
     ]), # End Div Container
