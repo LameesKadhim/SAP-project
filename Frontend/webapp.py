@@ -107,9 +107,9 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                 html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
         ])
     ]),
-# End Header **************************************************
+    # End Header **************************************************
 
-        dcc.Tabs(style={'margin':'10px 0px'},children=[
+    dcc.Tabs(style={'margin':'10px 0px'},children=[
 
         # Start HOME  Tab*********************************************
         dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
@@ -280,8 +280,30 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
         ]), #End Dashboard Tab ******************************
 
-            # Start ML Tab *********************************************
-            dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
+        # Start ML tab
+        dcc.Tab(label=' ML', className='tab-icon ', children=[
+            html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
+            html.Div(className='row', style={'margin':'15px'} , children=[ 
+                html.Div(className='twelve columns', children=[
+                    html.P('Our task is to predict the student admission probability using a regression task'),
+                    html.P('Steps to build our model:'),
+                    html.Ul(id='model-list', children=[
+                        html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
+                        html.Li('Apply different machine learning regression models'),
+                        html.Li('Select the best model'),
+                        html.Li('Save the model')
+                        ]),
+                    html.P('In our task we used Random Forest Regressor model from scikit-learn library and obtain 85% score ' )
+                
+               ])   
+           ]),
+           html.Div(className='row', children=[
+               dcc.Graph(figure=importance_fig)
+               ])
+        ]),
+        #End ML Tab
+        # Start Prediction Tab *********************************************
+        dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
                 
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
@@ -441,13 +463,13 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                     # Start Right Side ***************************
                     html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
-                        dcc.Graph(figure=importance_fig),
                         dcc.Graph(id = 'barGraph',style={'margin-left': '92px', 'margin-top': '37px','textAlign': 'center'})
                         
                     ])
                 ])
             ]), # ***END ML TAB****************************************
 
+        
         ]) # ***END TABS ****************************************
 
     ]), # End Div Container
