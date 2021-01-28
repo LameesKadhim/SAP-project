@@ -67,4 +67,20 @@
     font-size:20px;
     padding:10px;
     color: black;
+<<<<<<< HEAD
+}
+
+.border-style{
+    border-style: groove;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 3px 3px;
+}
+
+.prediction-bar {
+    margin-left: 90px;
+    margin-top: 30px;
+    text-align: center;
+=======
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 }

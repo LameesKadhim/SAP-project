@@ -39,12 +39,21 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
+<<<<<<< HEAD
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
                                 log_x=True,
                                 size_max=60)
 #----------------------------------------------------------------------------------
+=======
+#----------------------------------------------------------------------------------
+gerVSadmit_fig = px.scatter(df, x="GRE Score", 
+                                y="Chance of Admit",
+                                log_x=True,
+                                size_max=60)
+#----------------------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 toeflVSadmit_fig = px.scatter(df, x="TOEFL Score", 
                                 y="Chance of Admit",
                                 log_x=True,
@@ -53,7 +62,11 @@ toeflVSadmit_fig = px.scatter(df, x="TOEFL Score",
 cgpaVSadmit = px.scatter(df, x="CGPA", 
                             y="Chance of Admit",
                             log_x=True, size_max=60)
+<<<<<<< HEAD
+#-----------------------------------------------------------------------------------
+=======
 #--------------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 df_count = df.groupby('University Rating', as_index = False).agg('count')
 df_count ['std_count'] = df_count['LOR']
 lorVSadmit_fig = px.bar(df_count, 
@@ -71,7 +84,11 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
+<<<<<<< HEAD
+#---------------------------------------------------------------------
+=======
 #----------------------------------------------------------------------
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
 
@@ -107,10 +124,17 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                 html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
         ])
     ]),
+<<<<<<< HEAD
+# End Header ********************************************************
+
+        dcc.Tabs(style={'margin':'10px 0px'},children=[
+
+=======
     # End Header **************************************************
 
     dcc.Tabs(style={'margin':'10px 0px'},children=[
 
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
         # Start HOME  Tab*********************************************
         dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
             html.Div(className='row' , children=[
@@ -280,6 +304,10 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
         ]), #End Dashboard Tab ******************************
 
+<<<<<<< HEAD
+            # Start ML Tab *********************************************
+            dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
+=======
         # Start ML tab
         dcc.Tab(label=' ML', className='tab-icon ', children=[
             html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
@@ -304,68 +332,66 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         #End ML Tab
         # Start Prediction Tab *********************************************
         dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                 
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
-                    html.Div(className='five columns', children=[
+                    html.Div(className='five columns border-style', children=[
 
                         # CGPA Slider ************************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
-                                html.Label('CGPA')
-                            ]),
+                        html.Div(style={'padding':'5px'}, children=[
+                            html.Label('CGPA')
+
                         ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
-                                daq.NumericInput(
-                                                id = 'CGPAInput',
-                                                min=1,
-                                                max=10,
-                                                value=5,
-                                                size = 200
-                                            ) 
+                        html.Div(style={'padding':'5px'}, children=[
+                            daq.NumericInput(
+                                            id = 'CGPAInput',
+                                            min=1,
+                                            max=10,
+                                            value=5,
+                                            size = 200
+                                        ) 
                                 
-                            ])
                         ]),
 
                         # GRE Score Slider ************************************
                         html.Div(className='row',style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 html.Label('GRE score')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 daq.Slider(id = 'GRESlider', min=130, max=170, value=140,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
                                 )
-                            ])
+                        #    ])
                         ]),
 
                         # TOFEL Slider ************************************
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 html.Label('TOEFL iBT Score')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 daq.Slider(id = 'TOEFLSlider', min=61, max=120, value=90,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
                                 )
-                            ])
+                        #    ])
                         ]),
 
-                        # Rating Div ****************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        # Rating Div *************************************
+                        html.Div(style={'padding':'5px'}, children=[
+                        #    html.Div(className='six columns', children=[
                                 html.Label('University Rating')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 dcc.Dropdown(
                                     id = 'RatingDrop',
                                     options=[
@@ -377,17 +403,17 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='1'
                                 )
-                            ])
+                        #    ])
                         ]),
 
-                        # LOR Div *******************************
+                        # LOR Div *****************************************
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns',style={'width':'100%'}, children=[
+                        #    html.Div(className='six columns',style={'width':'100%'}, children=[
                                 html.Label('Letter Of Recommendation')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 dcc.Dropdown(
                                     id = 'LORDrop',
                                     options=[
@@ -404,17 +430,17 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='0.5'
                                 )
-                            ])
+                        #    ])
                         ]),
 
-                        # SOP DIv ************************************
+                        # SOP DIv ***************************************
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 html.Label('Statement of Purpose')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        #    html.Div(className='six columns', children=[
                                 dcc.Dropdown(
                                     id = 'SOPDrop',
                                     options=[
@@ -426,15 +452,15 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='1'
                                 )
-                            ])
+                        #    ])
                         ]),
 
                 
                         # Reaserch DIv ************************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
+                        html.Div(style={'padding':'5px'}, children=[
+                        #    html.Div(className='six columns', children=[
                                 html.Label('Reasearch Experience')
-                            ]),
+                        #    ]),
                         ]),
                         html.Div(className='row', style={'padding':'5px'}, children=[
                             html.Div(className='six columns', children=[
@@ -447,23 +473,30 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     value='0'
                                 )  
                             ])
-                        ]),
-
-                        #Admission prediction
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', style={'width':'200px','margin-top': '31px'}, children=[
-                                html.H6("Admission Probablity: "),
-                                html.H5(id="prediction_result", style={'font-weight':'bold'}), 
-                            ])
-                        ]),
-                        
+                        ])
                     ]),
                     # End Left Side *****************************
 
 
                     # Start Right Side ***************************
                     html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
+<<<<<<< HEAD
+                        
+                        #Admission prediction Text
+                        html.Div(children=[
+                                html.H6("Admission Probablity"),
+                                html.H5(id="prediction_result", 
+                                        style={'font-weight':'bold', 'font-size':'40px'}), 
+                        ]),
+
+                        # Importance bar
+                        # dcc.Graph(figure=importance_fig),
+                        
+                        # Prediction bar 
+                        dcc.Graph(id = 'barGraph',className='prediction-bar')
+=======
                         dcc.Graph(id = 'barGraph',style={'margin-left': '92px', 'margin-top': '37px','textAlign': 'center'})
+>>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                         
                     ])
                 ])
@@ -510,7 +543,7 @@ def update_prediction(GRE, TOEFL, Rating,SOP,LOR, CGPA, Research):
     # Prediction is calculated based on the input_X array
     prediction = round(model.predict(input_X)[0] * 100, 2)
    
-    #prepare the bar chart graph
+    #prepare the prediction bar chart graph
     data = go.Bar(x =[0,1,2], y = [0,prediction,0])
         
     layout = go.Layout(
@@ -528,7 +561,11 @@ def update_prediction(GRE, TOEFL, Rating,SOP,LOR, CGPA, Research):
             ticks='',
             showticklabels=True)
         )
-    figure = go.Figure(data=data, layout=layout)  
+    figure = go.Figure(data=data, layout=layout)
+    # Customize aspect
+    figure.update_traces(marker_color='rgb(158,202,225)', 
+                        marker_line_color='rgb(8,48,107)',
+                        marker_line_width=1.5, opacity=0.8)
     prediction  = '{:.2f} %'.format(prediction)   
     # And retuned to the Output of the callback function
     return prediction, figure 
