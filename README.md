@@ -51,7 +51,7 @@ This is a student project about predicting the chance of admission. For this pro
 
 ## Visualization:
 
-### <summary> Home </summary>
+###  Home
 ![Home](https://user-images.githubusercontent.com/57901189/106772583-744bd900-6640-11eb-9f9e-d0dcac412b93.JPG)
 ----------------------------------------------
 ### Dashboard
