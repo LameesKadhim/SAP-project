@@ -3,6 +3,7 @@ import numpy as np
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_table
 import pandas as pd
 import dash_daq as daq
@@ -15,7 +16,8 @@ import plotly.graph_objects as go
 # Use Plotly locally
 cf.go_offline()
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
+external_stylesheets = [ dbc.themes.BOOTSTRAP,
+                        'https://codepen.io/chriddyp/pen/bWLwgP.css',
                         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css']
 
 
@@ -23,11 +25,27 @@ df1 = pd.read_csv('../Dataset/admission_predict_V1.2.csv').head()
 model = joblib.load('../Backend/model_RandF.sav')
 #----------------------------------------------------------------------------------------
 
-# Feature importance Visualization
+# Plotting regression result
 df = pd.read_csv('../Dataset/admission_predict_V1.2.csv')
 X = df.drop(['Chance of Admit','Serial No.'], axis=1)
 y = df['Chance of Admit']
+y_predicted = model.predict(X)
 
+regression_fig = go.Figure()
+regression_fig.add_trace(go.Scatter(x=y,
+                                    y=y_predicted,
+                                    mode='markers',
+                                    name='actual vs. predicted'))
+
+regression_fig.add_trace(go.Scatter(x=[y.min(), y.max()], 
+                                    y=[y.min(), y.max()],
+                                    mode='lines',
+                                    name='regression line'))
+regression_fig.update_layout(title='actual vs. predicted chance of admission',
+                                xaxis_title='Actual output',
+                                yaxis_title='Predicted output')
+#----------------------------------------------------------------------------------
+# Feature importance Visualization
 importance_frame = pd.DataFrame()
 importance_frame['Features'] = X.columns
 importance_frame['Importance'] = model.feature_importances_
@@ -39,6 +57,10 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
+<<<<<<< HEAD
+# 
+=======
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
@@ -71,6 +93,10 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
+<<<<<<< HEAD
+#---------------------------------------------------------------------
+=======
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
@@ -91,7 +117,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(style={'margin':'0'}, children=[
     html.Div(className='container', children=[
-    
+    #dbc.Container(children=[
     # Start Header ***********************************************
         html.Div(style = {'background-color':'rgb(249 249 249)','padding':'10px'}, className= 'row', children=[
             html.Div(className='two columns', children=[
@@ -223,6 +249,11 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
 
         ]),
+<<<<<<< HEAD
+        dcc.Tab(label='Dataset'),
+        # Start Dashboard Tab
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[
+=======
 
         # Start Dataset Tab **********************************
         dcc.Tab(label=' DATASET', className='tab-icon fa fa-database' , children=[
@@ -244,6 +275,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                     ])
                 ]),
 
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
             html.Div(className='row', children=[            
                 dash_table.DataTable(
                     id='table',
@@ -306,21 +338,29 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
             html.Div(className='row', style={'margin':'15px'} , children=[ 
                 html.Div(className='twelve columns', children=[
-                    html.P('Our task is to predict the student admission probability using a regression task'),
-                    html.P('Steps to build our model:'),
+                    html.P('Post graduate degrees are becoming more and more a desired degree all over the world. It is an advantage for the student to have an idea a head about their probability of being admitted to a university, as a result the students can work on enhancing the language test or the degree for their currently running courses... etc.In our project we use a regression task to predict the student admission percentage.'),
+                    html.H6('Steps to build our model:',style={'font-weight':'bold'}),
                     html.Ul(id='model-list', children=[
                         html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
                         html.Li('Apply different machine learning regression models'),
                         html.Li('Select the best model'),
                         html.Li('Save the model')
                         ]),
-                    html.P('In our task we used Random Forest Regressor model from scikit-learn library and obtain 85% score ' )
-                
+                    html.P('In our task we used Random Forest Regressor model from scikit-learn library'),
+                    html.H6('Random Forest method explanation:',style={'font-weight':'bold'}),
+                    html.P('Random forests are an ensemble learning method for classification, regression and other tasks that work by building a multitude of decision trees at training time and generating the class that is the class type (classification) or mean/average prediction (regression) of the individual trees'),
+                    html.Div(className='row', children=[
+                            dcc.Graph(figure=importance_fig)
+                         ]),
+                    html.H6('Evaluation',style={'font-weight':'bold'}),
+                    html.P('We test our model on the test set and the random forest regressor score was 85%'),
+                    html.Div(className='row', children=[
+                           dcc.Graph(figure=regression_fig)
+                     ]),
                ])   
            ]),
-           html.Div(className='row', children=[
-               dcc.Graph(figure=importance_fig)
-               ])
+
+          
         ]),
         #End ML Tab
         # Start Prediction Tab *********************************************
@@ -480,9 +520,8 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                         style={'font-weight':'bold', 'font-size':'40px'}), 
                         ]),
 
-                        # Importance bar
-                        # dcc.Graph(figure=importance_fig),
-                        
+                       
+             
                         # Prediction bar 
                         dcc.Graph(id = 'barGraph',className='prediction-bar')
                         
