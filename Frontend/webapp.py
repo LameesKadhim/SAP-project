@@ -39,21 +39,12 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
-<<<<<<< HEAD
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
                                 log_x=True,
                                 size_max=60)
 #----------------------------------------------------------------------------------
-=======
-#----------------------------------------------------------------------------------
-gerVSadmit_fig = px.scatter(df, x="GRE Score", 
-                                y="Chance of Admit",
-                                log_x=True,
-                                size_max=60)
-#----------------------------------------------------------------------------------
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 toeflVSadmit_fig = px.scatter(df, x="TOEFL Score", 
                                 y="Chance of Admit",
                                 log_x=True,
@@ -62,11 +53,7 @@ toeflVSadmit_fig = px.scatter(df, x="TOEFL Score",
 cgpaVSadmit = px.scatter(df, x="CGPA", 
                             y="Chance of Admit",
                             log_x=True, size_max=60)
-<<<<<<< HEAD
-#-----------------------------------------------------------------------------------
-=======
 #--------------------------------------------------------------------------
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 df_count = df.groupby('University Rating', as_index = False).agg('count')
 df_count ['std_count'] = df_count['LOR']
 lorVSadmit_fig = px.bar(df_count, 
@@ -84,11 +71,7 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
-<<<<<<< HEAD
-#---------------------------------------------------------------------
-=======
 #----------------------------------------------------------------------
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
 
@@ -124,17 +107,10 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                 html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
         ])
     ]),
-<<<<<<< HEAD
-# End Header ********************************************************
-
-        dcc.Tabs(style={'margin':'10px 0px'},children=[
-
-=======
     # End Header **************************************************
 
     dcc.Tabs(style={'margin':'10px 0px'},children=[
 
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
         # Start HOME  Tab*********************************************
         dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
             html.Div(className='row' , children=[
@@ -247,9 +223,27 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
 
         ]),
-        
-        # Start Dashboard Tab
-        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[
+
+        # Start Dataset Tab **********************************
+        dcc.Tab(label=' DATASET', className='tab-icon fa fa-database' , children=[
+             # About Dataset
+             html.Div(className='row', children=[
+                html.Label(className='block-caption', children=['About Dataset']),
+                    html.Label(className='text-content', children=[
+                        'This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university. We use the dataset which is available in Link below: '
+                    ])
+                ]),
+                html.Div(className='row', style={'text-align': 'left' , 'margin-down':'5px'} , children=[
+                html.A(
+                        "View our dataset source link", href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv', target="_blank")
+                ]),
+
+            html.Div(className='row', children=[
+                html.Label(className='text-content', children=[
+                    'The size of dataset is 500 records and 9 columns and it contains several parameters which are considered important during the application for Masters Programs. depending on the following factors :'
+                    ])
+                ]),
+
             html.Div(className='row', children=[            
                 dash_table.DataTable(
                     id='table',
@@ -257,7 +251,10 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                     data=df1.to_dict('records')
                 )
             ]),
-            
+        ]),
+        
+        # Start Dashboard Tab ******************************
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[            
             html.Div(className='row', children=[
                 html.Div(className='six columns', children=[
                     html.Div(className='row', children=[
@@ -265,7 +262,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                             id='bar',
                             figure= lorVSadmit_fig                                 
                         )  
-                                            ]),          
+                    ]),          
                     html.Div(className='row', children=[
                         dcc.Graph(
                             id='scatter1',
@@ -304,10 +301,6 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
         ]), #End Dashboard Tab ******************************
 
-<<<<<<< HEAD
-            # Start ML Tab *********************************************
-            dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
-=======
         # Start ML tab
         dcc.Tab(label=' ML', className='tab-icon ', children=[
             html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
@@ -332,7 +325,6 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         #End ML Tab
         # Start Prediction Tab *********************************************
         dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                 
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
@@ -480,7 +472,6 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
                     # Start Right Side ***************************
                     html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
-<<<<<<< HEAD
                         
                         #Admission prediction Text
                         html.Div(children=[
@@ -494,9 +485,6 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                         
                         # Prediction bar 
                         dcc.Graph(id = 'barGraph',className='prediction-bar')
-=======
-                        dcc.Graph(id = 'barGraph',style={'margin-left': '92px', 'margin-top': '37px','textAlign': 'center'})
->>>>>>> bbf68ecec423a8fc9e0c8ee926df2f9f40489dbc
                         
                     ])
                 ])
