@@ -10,6 +10,11 @@ This is a student project about predicting the chance of admission. For this pro
   
 # Requirments and prepration
 
+  * Model-Classification
+    + [Numpy](https://numpy.org/)
+    + [Pandas](https://pandas.pydata.org/)
+    + [scikit-learn](https://scikit-learn.org/stable/)
+
   * Create a virtual environment for the project: <b> python -m venv venv </b>
   * Activate the virtual environment for windows: <b> venv\Scripts\activate </b>
     - Activate the virtual environment for Linux/macOS: <b> source venv/bin/activate </b>
