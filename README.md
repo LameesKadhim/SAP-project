@@ -38,9 +38,7 @@ This is a student project about predicting the chance of admission. For this pro
       * KNeighbours
       * SVM
       * AdaBoostClassifier
-      * GradientBoostingClassifie
-      * Xgboost
-      * Lasso
+      * GradientBoostingClassifier
       * Ridge
       * BayesianRidge
       * ElasticNet
