@@ -57,7 +57,10 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
+<<<<<<< HEAD
 # 
+=======
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
@@ -90,7 +93,10 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
+<<<<<<< HEAD
 #---------------------------------------------------------------------
+=======
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
@@ -243,9 +249,33 @@ app.layout = html.Div(style={'margin':'0'}, children=[
             ])
 
         ]),
+<<<<<<< HEAD
         dcc.Tab(label='Dataset'),
         # Start Dashboard Tab
         dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[
+=======
+
+        # Start Dataset Tab **********************************
+        dcc.Tab(label=' DATASET', className='tab-icon fa fa-database' , children=[
+             # About Dataset
+             html.Div(className='row', children=[
+                html.Label(className='block-caption', children=['About Dataset']),
+                    html.Label(className='text-content', children=[
+                        'This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university. We use the dataset which is available in Link below: '
+                    ])
+                ]),
+                html.Div(className='row', style={'text-align': 'left' , 'margin-down':'5px'} , children=[
+                html.A(
+                        "View our dataset source link", href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv', target="_blank")
+                ]),
+
+            html.Div(className='row', children=[
+                html.Label(className='text-content', children=[
+                    'The size of dataset is 500 records and 9 columns and it contains several parameters which are considered important during the application for Masters Programs. depending on the following factors :'
+                    ])
+                ]),
+
+>>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
             html.Div(className='row', children=[            
                 dash_table.DataTable(
                     id='table',
@@ -253,7 +283,10 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                     data=df1.to_dict('records')
                 )
             ]),
-            
+        ]),
+        
+        # Start Dashboard Tab ******************************
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[            
             html.Div(className='row', children=[
                 html.Div(className='six columns', children=[
                     html.Div(className='row', children=[
@@ -261,7 +294,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                             id='bar',
                             figure= lorVSadmit_fig                                 
                         )  
-                                            ]),          
+                    ]),          
                     html.Div(className='row', children=[
                         dcc.Graph(
                             id='scatter1',
