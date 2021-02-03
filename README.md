@@ -50,17 +50,17 @@ This is a student project about predicting the chance of admission. For this pro
 * DASH/Plotly
 
 ## Visualization:
+----------------------------------------------
 ### Home
-----------------------------------------------
 ![Home](https://user-images.githubusercontent.com/57901189/106772583-744bd900-6640-11eb-9f9e-d0dcac412b93.JPG)
+----------------------------------------------
 ### Dashboard
-----------------------------------------------
 ![Dashboard](https://user-images.githubusercontent.com/57901189/106772637-8299f500-6640-11eb-823a-cf1b6b09be3c.JPG)
+----------------------------------------------
 ### Machine Learning
-----------------------------------------------
 ![ML](https://user-images.githubusercontent.com/57901189/106772679-8cbbf380-6640-11eb-8ac6-eef23753b4f1.JPG)
-### Prediction
 ----------------------------------------------
+### Prediction
 ![prediction](https://user-images.githubusercontent.com/57901189/106772711-93e30180-6640-11eb-9bb4-98d5696e49c8.JPG)
 
 
