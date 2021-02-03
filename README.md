@@ -1,4 +1,8 @@
-# Prediction of Student Admission to Graduate Programs
+<p align="left">
+<img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo.png" width="100">
+</p>
+
+# Student Admission Prediction
 This is a student project about predicting the chance of admission. For this project we are using Graduate Admission Dataset (https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict_Ver1.1.csv) We will use machine learning to analyze the data, find a model to predict the University Ranking and then visualize the result.
   
 # Requirments and prepration
