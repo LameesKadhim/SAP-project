@@ -41,7 +41,8 @@ regression_fig.add_trace(go.Scatter(x=[y.min(), y.max()],
                                     name='regression line'))
 regression_fig.update_layout(title='actual vs. predicted chance of admission',
                                 xaxis_title='Actual output',
-                                yaxis_title='Predicted output')
+                                yaxis_title='Predicted output',
+                                height=500, width = 700)
 #----------------------------------------------------------------------------------
 # Feature importance Visualization
 importance_frame = pd.DataFrame()
@@ -51,10 +52,9 @@ importance_frame = importance_frame.sort_values(by=['Importance'], ascending=Tru
 
 importance_fig = px.bar(importance_frame, y='Features', x='Importance', color='Features',orientation='h')
 
-importance_fig.update_layout(title='The impact of the various features on the chance of admission',
-                            xaxis_title='Importance',
-                            yaxis_title='',
-                            height=500, width = 700 )
+importance_fig.update_layout(xaxis_title='Importance',
+                             yaxis_title='',
+                             height=500, width = 700 )
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
@@ -154,40 +154,39 @@ app.layout = html.Div( children=[
                     ]),
                     # TEXT
                     html.Div(className='nine columns', children=[
-                        html.H2('Objective of the project', className='block-caption'),
-
-                        html.P('''Our university acceptance calculator can help you
-                                 to find the probability of getting accepted into a 
-                                 particular university based on your profile, and it’s 
-                                 completely free. Enter your scores and GPA to see our 
-                                 predicted output. This output will give you a fair 
-                                 idea about your chances for a particular university.''', 
-                                 className='text-content')
+                        html.H2('Motivation', className='block-caption'),
+                        html.P('''Post graduate degrees are becoming more and more desired degrees all over the world. 
+                                It is an advantage for the student to have an idea a head about their probability
+                                of being admitted to a university, as a result the students can work on enhancing 
+                                the language test or the degree for their currently running courses and so on.
+                                In our project we use a regression task to predict the student admission percentage.''',
+                                className='text-content')
                     ])
                 ]),
             ]),
 
-            # Model Explaination Section *******************************
-            html.Section(className='section', children=[
-                html.Div(className='container', children=[
-                    html.H2('Model Explanation', className='block-caption'),
+                html.Section(className='section objective-overlay-img', children=[
+                html.Div(className='objective-overlay', children=[
+                    html.Div(className='container', children=[
+                    html.H2('PROJECT OBJECTIVE',className='objective-H2'),
                         html.Div(className='row', children=[ 
                             html.Div(children=[
-                                html.P('''Post graduate degrees are becoming more and more a desired degree all over the world. 
-                                        It is an advantage for the student to have an idea a head about their probability
-                                        of being admitted to a university, as a result the students can work on enhancing 
-                                        the language test or the degree for their currently running courses... etc.
-                                        In our project we use a regression task to predict the student admission percentage.''',
+                                html.P('''Our university acceptance calculator can help you
+                                        to find the probability of getting accepted into a 
+                                        particular university based on your profile, and it’s 
+                                        completely free. Enter your scores and GPA to see our 
+                                        predicted output. This output will give you a fair 
+                                        idea about your chances for a particular university.''', 
                                         className='text-content')
                             ])
                         ])
                     ])
- 
-                ]),
+                ])
+            ]),
 
             # Start About Us Section *****************************************
-            html.Div(className='container', children=[
-                html.Section(className='AboutUs', children=[
+            html.Div(className='AboutUs', children=[
+                html.Section(className='container', children=[
                         html.H3('Datology Team',className='block-caption'),
                         
                         html.Div(style={'overflow': 'hidden'}, children=[
@@ -328,7 +327,7 @@ app.layout = html.Div( children=[
             ]),
             # End Overlay Section *************************************
 
-            html.Div(className='container', children=[
+            html.Div(className='container',style={'margin-top':'10px'}, children=[
                 html.Div(className='row', children=[
                     html.Div(className='six columns', children=[
                         html.Div(className='row box', children=[
@@ -393,7 +392,7 @@ app.layout = html.Div( children=[
             # Building Steps section *****************************
             html.Div(className='container', children=[
                 html.H6('Steps to build our model:', className='block-caption'),
-                html.Ul(id='model-list', children=[
+                html.Ul(id='model-list',className='text-content', children=[
                     html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
                     html.Li('Apply different machine learning regression models'),
                     html.Li('Select the best model'),
@@ -413,8 +412,13 @@ app.layout = html.Div( children=[
                 that is the class type (classification) or mean/average prediction (regression) of the 
                 individual trees''', 
                 className='text-content'),
-                
-                html.Div(className='row', children=[
+            ]),
+            # Features impact
+            html.Div(className='container', children=[
+                html.H6('Features Impact on chance of admission:', className='block-caption'),
+                html.P('''The graph below shows the impact of various features on the chance of students' admission percentage ''',
+                        className='text-content'),
+                html.Div(className='row',children=[
                     dcc.Graph(figure=importance_fig)
                 ]),
             ]),
@@ -430,9 +434,6 @@ app.layout = html.Div( children=[
                     dcc.Graph(figure=regression_fig)
                 ]),
                 
-                html.Div(className='row', children=[
-                    dcc.Graph(figure=importance_fig)
-                ]),
             ]),
           
         ]),
