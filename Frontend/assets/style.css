@@ -110,11 +110,18 @@
 
 
 .AboutUs {
+    padding:5px 0px;
+    margin: 0px;
+    text-align:center;
+    color:#276678;
+}
+
+.section {
     background-color:#d3e0ea;/*rgb(249 249 249);*/
     padding:5px 0px;
     margin: 0px;
     text-align:center;
-    color:#276678
+    
 }
 
 
