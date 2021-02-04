@@ -125,6 +125,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
     ]),
     # End Header **************************************************
     
+    # Start Tabs **************************************************
     dcc.Tabs(className='tabs', children=[
 
         # Start HOME  Tab*********************************************
@@ -366,28 +367,45 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                     ])
                 ])
             ]),
-
             # End Overlay Section *************************************
+
             html.Div(className='container', children=[
-                html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
+                html.H2('Model Explanation', className='block-caption'),
                 html.Div(className='row', style={'margin':'15px'} , children=[ 
                     html.Div(className='twelve columns', children=[
-                        html.P('Post graduate degrees are becoming more and more a desired degree all over the world. It is an advantage for the student to have an idea a head about their probability of being admitted to a university, as a result the students can work on enhancing the language test or the degree for their currently running courses... etc.In our project we use a regression task to predict the student admission percentage.'),
-                        html.H6('Steps to build our model:',style={'font-weight':'bold'}),
+                        html.P('''Post graduate degrees are becoming more and more a desired degree all over the world. 
+                                It is an advantage for the student to have an idea a head about their probability
+                                 of being admitted to a university, as a result the students can work on enhancing 
+                                 the language test or the degree for their currently running courses... etc.
+                                 In our project we use a regression task to predict the student admission percentage.''',
+                                 className='text-content'),
+
+
+                        html.H6('Steps to build our model:', className='block-caption'),
                         html.Ul(id='model-list', children=[
                             html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
                             html.Li('Apply different machine learning regression models'),
                             html.Li('Select the best model'),
                             html.Li('Save the model')
                             ]),
-                        html.P('In our task we used Random Forest Regressor model from scikit-learn library'),
-                        html.H6('Random Forest method explanation:',style={'font-weight':'bold'}),
-                        html.P('Random forests are an ensemble learning method for classification, regression and other tasks that work by building a multitude of decision trees at training time and generating the class that is the class type (classification) or mean/average prediction (regression) of the individual trees'),
+                        html.P('In our task we used Random Forest Regressor model from scikit-learn library', 
+                                className='text-content'),
+
+                        html.H6('Random Forest method explanation:', className='block-caption'),
+                        html.P('''Random forests are an ensemble learning method for classification, regression and other tasks
+                                 that work by building a multitude of decision trees at training time and generating the class 
+                                 that is the class type (classification) or mean/average prediction (regression) of the 
+                                 individual trees''', 
+                                 className='text-content'),
+
                         html.Div(className='row', children=[
                                 dcc.Graph(figure=importance_fig)
                             ]),
-                        html.H6('Evaluation',style={'font-weight':'bold'}),
-                        html.P('We test our model on the test set and the random forest regressor score was 85%'),
+
+                        html.H6('Evaluation', className='block-caption'),
+                        html.P('We test our model on the test set and the random forest regressor score was 85%', 
+                                className='text-content'),
+
                         html.Div(className='row', children=[
                             dcc.Graph(figure=regression_fig)
                         ]),
@@ -555,9 +573,14 @@ app.layout = html.Div(style={'margin':'0'}, children=[
 
         
         ]) # ***END TABS ****************************************
+    ]), 
+    # End Tabs ***********************************************
 
-    ]), # End Div Container
-
+    # Start Footer ***********************************************
+    html.Footer(className='footer', children=[
+        html.P('Copyright © 2021 Datology Group. Learning Analysis course . WS20/21')
+    ])
+    # End Footer *************************************************
 
 ])  # End Main Layout ***********************************************************
 
