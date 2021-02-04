@@ -105,7 +105,7 @@ pie_fig.update_traces(hoverinfo='label+percent', textfont_size=15,
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-app.layout = html.Div(style={'margin':'0'}, children=[
+app.layout = html.Div(style={'margin':'0px','padding':'0px'}, children=[
     html.Div(children=[
 
     # Start Header ***********************************************
@@ -125,10 +125,11 @@ app.layout = html.Div(style={'margin':'0'}, children=[
     ]),
     # End Header **************************************************
     
-    dcc.Tabs(className='tabs', children=[
+    dcc.Tabs(parent_className='custom-tabs',
+             className='custom-tabs-container', children=[
 
         # Start HOME  Tab*********************************************
-        dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
+        dcc.Tab(label=' HOME', className='tab-icon fa fa-home',selected_className='custom-tab--selected',  children=[
 
             # Start Overlay Section *********************************
             html.Section(className='row overlay-img', children=[
@@ -226,7 +227,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         ]),
 
         # Start Dataset Tab **********************************
-        dcc.Tab(label=' DATASET', className='tab-icon fa fa-database' , children=[
+        dcc.Tab(label=' DATASET', className='tab-icon fa fa-database',selected_className='custom-tab--selected' , children=[
             # Start Overlay Section *********************************
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
@@ -293,7 +294,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         ]),
         
         # Start Dashboard Tab ******************************
-        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[ 
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart',selected_className='custom-tab--selected' , children=[ 
             
             # Start Overlay Section *********************************
             html.Section(className='row overlay-img', children=[
@@ -356,7 +357,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         ]), #End Dashboard Tab ******************************
 
         # Start ML tab
-        dcc.Tab(label=' MACHINE LEARNING', className='tab-icon fa fa-lightbulb-o', children=[
+        dcc.Tab(label=' MACHINE LEARNING', className='tab-icon fa fa-lightbulb-o',selected_className='custom-tab--selected', children=[
             # Start Overlay Section *********************************
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
@@ -399,7 +400,7 @@ app.layout = html.Div(style={'margin':'0'}, children=[
         #End ML Tab*********************************************
 
         # Start Prediction Tab *********************************************
-        dcc.Tab(label=' PREDICTION', className='tab-icon fa fa-line-chart',  children=[
+        dcc.Tab(label=' PREDICTION', className='tab-icon fa fa-line-chart',selected_className='custom-tab--selected',  children=[
             # Start Overlay Section *********************************
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
