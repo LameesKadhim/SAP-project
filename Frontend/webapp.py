@@ -59,23 +59,26 @@ importance_fig.update_layout(title='The impact of the various features on the ch
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
                                 log_x=True,
-                                size_max=60)
+                                size_max=60,
+                                title = 'GRE vs. Chance of admission')
 #----------------------------------------------------------------------------------
 toeflVSadmit_fig = px.scatter(df, x="TOEFL Score", 
                                 y="Chance of Admit",
                                 log_x=True,
-                                size_max=60)
+                                size_max=60,
+                                title = 'TOEFL vs. Chance of admission')
 #-----------------------------------------------------------------------------------
 cgpaVSadmit = px.scatter(df, x="CGPA", 
                             y="Chance of Admit",
-                            log_x=True, size_max=60)
+                            log_x=True, size_max=60,
+                            title = 'CGPA vs. Chance of admission')
 #--------------------------------------------------------------------------
 df_count = df.groupby('University Rating', as_index = False).agg('count')
 df_count ['std_count'] = df_count['LOR']
 lorVSadmit_fig = px.bar(df_count, 
                         y='std_count',
                         x='University Rating', 
-                        title = 'Distriution of student applications across Universities_by_rating')
+                        title = ' Student Distriution across Universities')
 #---------------------------------------------------------------------
 df.sort_values(by=['University Rating'], inplace=True)
 df_avg =df.groupby ('University Rating', as_index=False)['Chance of Admit'].mean()
@@ -84,9 +87,9 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
                                     y=df_avg['Chance of Admit'],
                                     mode='lines+markers'))
 
-rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
+rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on avg. admission chance',
                                 xaxis_title='University Rating',
-                                yaxis_title='Chance of Admit')
+                                yaxis_title='Avg. Chance of Admit')
 #----------------------------------------------------------------------
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
@@ -105,7 +108,7 @@ pie_fig.update_traces(hoverinfo='label+percent', textfont_size=15,
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-app.layout = html.Div(style={'margin':'0px','padding':'0px'}, children=[
+app.layout = html.Div( children=[
     html.Div(children=[
 
     # Start Header ***********************************************
@@ -462,10 +465,11 @@ app.layout = html.Div(style={'margin':'0px','padding':'0px'}, children=[
                             html.Div(style={'padding':'5px'}, children=[
                                 daq.NumericInput(
                                                 id = 'CGPAInput',
-                                                min=1,
+                                                min=5,
                                                 max=10,
-                                                value=5,
-                                                size = 200) 
+                                                value=7,
+                                                size = 250
+                                                ) 
                                     
                             ]),
 
