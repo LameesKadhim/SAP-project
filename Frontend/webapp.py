@@ -39,10 +39,9 @@ regression_fig.add_trace(go.Scatter(x=[y.min(), y.max()],
                                     y=[y.min(), y.max()],
                                     mode='lines',
                                     name='regression line'))
-regression_fig.update_layout(title='actual vs. predicted chance of admission',
-                                xaxis_title='Actual output',
-                                yaxis_title='Predicted output',
-                                height=500, width = 700)
+regression_fig.update_layout(xaxis_title='Actual output',
+                             yaxis_title='Predicted output',
+                             height=500, width = 700)
 #----------------------------------------------------------------------------------
 # Feature importance Visualization
 importance_frame = pd.DataFrame()
@@ -150,7 +149,7 @@ app.layout = html.Div( children=[
                 html.Div(className='row', children=[
                     # LOGO
                     html.Div(className='three columns', children=[
-                        html.Img(src=app.get_asset_url('logo.png'), style={'width': '220px'}),
+                        html.Img(src=app.get_asset_url('logo.jpg'), style={'width': '220px','padding-top':'20px'}),
                     ]),
                     # TEXT
                     html.Div(className='nine columns', children=[
@@ -160,7 +159,7 @@ app.layout = html.Div( children=[
                                 of being admitted to a university, as a result the students can work on enhancing 
                                 the language test or the degree for their currently running courses and so on.
                                 In our project we use a regression task to predict the student admission percentage.''',
-                                className='text-content')
+                                className='text-content',style={'margin-bottom':'20px'})
                     ])
                 ]),
             ]),
@@ -223,7 +222,7 @@ app.layout = html.Div( children=[
 
                             html.Div(style={'float': 'left','width':'20%'}, children=[
                                 html.H6("Tamanna"),
-                                html.Img(src=app.get_asset_url('girl.png'), className='avatar'),
+                                html.Img(src=app.get_asset_url('Tamanna.jpg'), className='avatar'),
                                 html.Div(children=[
                                     html.A(href= 'https://github.com/tamanna18', className='fa fa-github social-link ', target="_blank"),
                                     html.A(href= 'https://www.linkedin.com/in/tamanna-724345189/', className='fa fa-linkedin social-link', target="_blank")
@@ -233,7 +232,7 @@ app.layout = html.Div( children=[
 
                             html.Div(style={'float': 'left','width':'20%'}, children=[
                                 html.H6("Kunal"),
-                                html.Img(src=app.get_asset_url('boy.jpg'), className='avatar'),
+                                html.Img(src=app.get_asset_url('kunal.png'), className='avatar'),
                                 html.Div(children=[
                                     html.A(href= 'https://github.com/kunalait', className='fa fa-github social-link ', target="_blank"),
                                     html.A(href= 'https://www.linkedin.com/in/kunal-2375b515a/', className='fa fa-linkedin social-link', target="_blank")
@@ -252,7 +251,8 @@ app.layout = html.Div( children=[
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
-                        html.H2('Dataset Details')
+                        html.H2('Dataset Details'),
+                        html.P("Explanation of the different features and the output of the dataset")
                     ])
                 ])
             ]),
@@ -265,7 +265,7 @@ app.layout = html.Div( children=[
                     html.P('''This dataset was built with the purpose of helping students in shortlisting 
                         universities with their profiles. The predicted output gives them a fair idea 
                         about their chances for a particular university. 
-                        We use the dataset which is available in Link below: ''',
+                        We use the dataset which is available in link below: ''',
                         className='text-content')
                 ]),
 
@@ -293,7 +293,7 @@ app.layout = html.Div( children=[
                     html.P(
                         '''The size of dataset is 500 records and 9 columns and it contains
                          several parameters which are considered important during the application for Masters Programs. 
-                        depending on the following factors :''',
+                        Table below shows a sample from our dataset :''',
                         className='text-content')
                     ]),
 
@@ -383,7 +383,7 @@ app.layout = html.Div( children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
                         html.H2('Machine Learning'),
-                    #    html.P("This dashboard show the relations between the features in the dataset")
+                        html.P("Model explanation, feature impact and model evaluation")
                     ])
                 ])
             ]),
@@ -418,7 +418,7 @@ app.layout = html.Div( children=[
                 html.H6('Features Impact on chance of admission:', className='block-caption'),
                 html.P('''The graph below shows the impact of various features on the chance of students' admission percentage ''',
                         className='text-content'),
-                html.Div(className='row',children=[
+                html.Div(className='row',style={'margin':'0px 115px',"border":"2px #1687a7 solid"},children=[
                     dcc.Graph(figure=importance_fig)
                 ]),
             ]),
@@ -430,7 +430,7 @@ app.layout = html.Div( children=[
                 html.P('We test our model on the test set and the random forest regressor score was 85%', 
                         className='text-content'),
 
-                html.Div(className='row', children=[
+                html.Div(className='row',style={'margin':'0px 115px',"border":"2px #1687a7 solid"}, children=[
                     dcc.Graph(figure=regression_fig)
                 ]),
                 
@@ -458,18 +458,18 @@ app.layout = html.Div( children=[
                     html.Div(className='five columns border-style', children=[
 
                         # CGPA Slider ************************************
-                        html.Div(style={'padding':'5px'}, children=[
+                        html.Div(style={'padding':'5px',}, children=[
                             html.Label('CGPA')
 
                         ]),
 
-                            html.Div(style={'padding':'5px'}, children=[
+                            html.Div(style={'padding':'5px','width':'85%'}, children=[
                                 daq.NumericInput(
                                                 id = 'CGPAInput',
                                                 min=5,
                                                 max=10,
                                                 value=7,
-                                                size = 250
+                                                size=265
                                                 ) 
                                     
                             ]),
@@ -478,7 +478,7 @@ app.layout = html.Div( children=[
                             html.Div(className='row',style={'padding':'5px'}, children=[
                                 html.Label('GRE score')
                             ]),
-                            html.Div(className='row', style={'padding':'5px'}, children=[
+                            html.Div(className='row', style={'padding':'5px','width':'85%'}, children=[
                                 daq.Slider(id = 'GRESlider', min=130, max=170, value=140,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
@@ -489,7 +489,7 @@ app.layout = html.Div( children=[
                             html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('TOEFL iBT Score')
                             ]),
-                            html.Div(className='row', style={'padding':'5px'}, children=[
+                            html.Div(className='row', style={'padding':'5px','width':'85%'}, children=[
                                 daq.Slider(id = 'TOEFLSlider', min=61, max=120, value=90,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
@@ -500,7 +500,7 @@ app.layout = html.Div( children=[
                             html.Div(style={'padding':'5px'}, children=[
                                 html.Label('University Rating')
                             ]),
-                            html.Div(className='row', style={'padding':'5px'}, children=[
+                            html.Div(className='row', style={'padding':'5px','width':'85%'}, children=[
                                 dcc.Dropdown(
                                     id = 'RatingDrop',
                                     options=[
@@ -518,7 +518,7 @@ app.layout = html.Div( children=[
                             html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('Letter Of Recommendation')
                             ]),
-                            html.Div(className='row', style={'padding':'5px'}, children=[
+                            html.Div(className='row', style={'padding':'5px','width':'85%'}, children=[
                                 dcc.Dropdown(
                                     id = 'LORDrop',
                                     options=[
@@ -541,7 +541,7 @@ app.layout = html.Div( children=[
                             html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('Statement of Purpose')
                             ]),
-                            html.Div(className='row', style={'padding':'5px'}, children=[
+                            html.Div(className='row', style={'padding':'5px','width':'85%'}, children=[
                                 dcc.Dropdown(
                                     id = 'SOPDrop',
                                     options=[
@@ -577,13 +577,12 @@ app.layout = html.Div( children=[
 
 
                         # Start Right Side ***************************
-                        html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
+                        html.Div(className='seven columns' , style={'text-align' : 'center', 'margin-top':'35px'}, children=[
                             
                             #Admission prediction Text
                             html.Div(children=[
-                                    html.H6("Admission Probablity" , className='block-caption'),
-                                    html.H5(id="prediction_result", 
-                                            style={'font-weight':'bold', 'font-size':'40px', 'color':'#1687a7'}), 
+                                    html.H6("Admission Probablity" ,className='prediction-text'),
+                                    html.H5(id="prediction_result",className='prediction-text'), 
                             ]),
                             
                             # Prediction bar 
@@ -645,7 +644,8 @@ def update_prediction(GRE, TOEFL, Rating,SOP,LOR, CGPA, Research):
     data = go.Bar(x =[0,1,2], y = [0,prediction,0])
         
     layout = go.Layout(
-            title = 'Admission Probability',
+            title = 'Admission Probability Graph',
+            title_x=0.5,
             height = 500,
             width  = 500,
             xaxis=dict(
