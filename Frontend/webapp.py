@@ -3,7 +3,6 @@ import numpy as np
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-import dash_bootstrap_components as dbc
 import dash_table
 import pandas as pd
 import dash_daq as daq
@@ -16,8 +15,7 @@ import plotly.graph_objects as go
 # Use Plotly locally
 cf.go_offline()
 
-external_stylesheets = [ dbc.themes.BOOTSTRAP,
-                        'https://codepen.io/chriddyp/pen/bWLwgP.css',
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
                         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css']
 
 
@@ -57,10 +55,6 @@ importance_fig.update_layout(title='The impact of the various features on the ch
                             xaxis_title='Importance',
                             yaxis_title='',
                             height=500, width = 700 )
-<<<<<<< HEAD
-# 
-=======
->>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------------------
 gerVSadmit_fig = px.scatter(df, x="GRE Score", 
                                 y="Chance of Admit",
@@ -93,10 +87,6 @@ rateVSadmit_fig.add_trace(go.Scatter(x=df_avg['University Rating'],
 rateVSadmit_fig.update_layout(title='Effect of Uni Ratings on admission',
                                 xaxis_title='University Rating',
                                 yaxis_title='Chance of Admit')
-<<<<<<< HEAD
-#---------------------------------------------------------------------
-=======
->>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
 #----------------------------------------------------------------------
 total = df_count['std_count'].sum()
 df_count['percentage'] = df_count['std_count']/total
@@ -116,256 +106,312 @@ pie_fig.update_traces(hoverinfo='label+percent', textfont_size=15,
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(style={'margin':'0'}, children=[
-    html.Div(className='container', children=[
-    #dbc.Container(children=[
+    html.Div(children=[
+
     # Start Header ***********************************************
-        html.Div(style = {'background-color':'rgb(249 249 249)','padding':'10px'}, className= 'row', children=[
-            html.Div(className='two columns', children=[
-                html.Img(src=app.get_asset_url('logo.png'), style={'width':'50%'}),
+    html.Header(className='header-style',children=[
+        html.Div(className= 'container ', children=[
+            html.Div(className='ten columns', children=[
+                #html.Img(src=app.get_asset_url('logo.png'), style={'width':'50%'}),
+                html.H3("SAP", style={'font-family': 'fantasy'})
         ]),
 
-            html.Div(className='eight columns',style = {'text-align':'center'}, children=[
-                html.H4("Student Admission Prediction")
-        ]),
-
-            html.Div(className='two columns', style = {'text-align':'right'} , children=[
-                html.A(" Source code ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-github header-links', target="_blank"),
-                html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank")
+            html.Div(className='two columns', style = {'text-align':'left','padding-top':'15px'} , children=[
+                html.A(" Video ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-youtube-play header-links', target="_blank"),
+                html.A(" Source code ", href='https://github.com/LameesKadhim/SAP-project', className='fa fa-github header-links', target="_blank")
+                
         ])
+      ])
     ]),
     # End Header **************************************************
-
-    dcc.Tabs(style={'margin':'10px 0px'},children=[
+    
+    dcc.Tabs(className='tabs', children=[
 
         # Start HOME  Tab*********************************************
         dcc.Tab(label=' HOME', className='custom-tab tab-icon fa fa-home',  children=[
-            html.Div(className='row' , children=[
 
-                # Start Left Side *****************************
-                html.Div(className='six columns', children=[
+            # Start Overlay Section *********************************
+            html.Section(className='row overlay-img', children=[
+                html.Div(className='overlay', children=[
+                    html.Div(className='banner', children=[
+                        html.H1('Student Admission Predicion'),
+                        html.P('SAP is the best place for the bachelor students to understand their chances of getting accepted into shortlisted universities')
+                    ])
+                ])
+            ]),
+            # End Overlay Section *************************************
 
-                    # Student Admission Prediction DIv ************************************
-                    html.Div(className='row', children=[
-                        html.Label(className='block-caption',
-                                   children=['Objective of the project']),
-                        html.Label(className='text-content', children=[
-                                   'Our university acceptance calculator can help you to find the probability of getting accepted into a particular university based on your profile, and it’s completely free. Enter your scores and GPA to see our predicted output. This output will give you a fair idea about your chances for a particular university.'
-                                   ])
-                    ]),
-
-                ]),
-                # End Left Side *****************************
-
-                # Start Right Side ***************************
-                html.Div(className='six columns', children=[
-
+            # INTRODUCTION ***************************************
+            html.Div(className='container' , children=[
+                html.Div(className='row', children=[
                     # LOGO
-                    html.Div(className='row', children=[
-                        html.Img(src=app.get_asset_url('logo.png'), style={'width': '250px'}),
+                    html.Div(className='three columns', children=[
+                        html.Img(src=app.get_asset_url('logo.png'), style={'width': '220px'}),
                     ]),
+                    # TEXT
+                    html.Div(className='nine columns', children=[
+                        html.H2('Objective of the project', className='block-caption'),
 
-                    # ABOUT US
-                    html.Div(className='row', children=[
-                        html.Label(className='block-caption', children=['What is SAP?']),
-                        html.Label(className='text-content', children=[
-                            'SAP(Student Admission Prediction) is the best place for the bachelor students to understand their chances of getting accepted into shortlisted universities'
-                        ])
-                    ]),
-                    # About Dataset
-                    html.Div(className='row', children=[
-                        html.Label(className='block-caption',
-                                   children=['About Dataset']),
-                        html.Label(className='text-content', children=[
-                            'This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university. We use the dataset which is available in Link below: '
-                        ])
-                    ]),
-
+                        html.P('''Our university acceptance calculator can help you
+                                 to find the probability of getting accepted into a 
+                                 particular university based on your profile, and it’s 
+                                 completely free. Enter your scores and GPA to see our 
+                                 predicted output. This output will give you a fair 
+                                 idea about your chances for a particular university.''', 
+                                 className='text-content')
+                    ])
                 ]),
-
-                    html.Div(className='row', style={'text-align': 'right' , 'margin-down':'5px'} , children=[
-                      html.A(
-                           "View our dataset source link", href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv', target="_blank")
-                    ]),
-
-                # End Right Side *********************************************
             ]),
 
             # Start About Us Section *****************************************
-            html.Section(className='AboutUs', children=[
-                    html.H3('Datology Team',style={'font-style':'bold'}),
-                    
-                    html.Div(style={'overflow': 'hidden'}, children=[
-                        html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Saif Almaliki"),
-                            html.Img(src=app.get_asset_url('saif.jpg'), className='avatar'),
-                            html.Div(children=[
-                                html.A(href= 'https://github.com/SaifAlmaliki', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/saif-almaliki-5a681376/', className='fa fa-linkedin social-link', target="_blank")
-                            ])
-                        ]),
-
+            html.Div(className='container', children=[
+                html.Section(className='AboutUs', children=[
+                        html.H3('Datology Team',className='block-caption'),
                         
-                        html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Sepideh Hosseini"),
-                            html.Img(src=app.get_asset_url('Sepideh.jpg'), className='avatar'),
-                            html.Div(children=[
-                                html.A(href= 'https://github.com/Sepideh-hd', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/sepideh-hosseini-dehkordi-16452610a/', className='fa fa-linkedin social-link', target="_blank")
-                                
-                            ])
-                        ]),
+                        html.Div(style={'overflow': 'hidden'}, children=[
+                            html.Div(style={'float': 'left','width':'20%'}, children=[
+                                html.H6("Saif Almaliki"),
+                                html.Img(src=app.get_asset_url('saif.jpg'), className='avatar'),
+                                html.Div(children=[
+                                    html.A(href= 'https://github.com/SaifAlmaliki', className='fa fa-github social-link ', target="_blank"),
+                                    html.A(href= 'https://www.linkedin.com/in/saif-almaliki-5a681376/', className='fa fa-linkedin social-link', target="_blank")
+                                ])
+                            ]),
 
-                        html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Lamees Kadhim"),
-                            html.Img(src=app.get_asset_url('lamees.png'), className='avatar'),
-                            html.Div(children=[
-                                html.A(href= 'https://github.com/LameesKadhim', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/lamees-mohammed-nazar-976587119/', className='fa fa-linkedin social-link', target="_blank")
-                                
-                            ])
-                        ]),
+                            
+                            html.Div(style={'float': 'left','width':'20%'}, children=[
+                                html.H6("Sepideh Hosseini"),
+                                html.Img(src=app.get_asset_url('Sepideh.jpg'), className='avatar'),
+                                html.Div(children=[
+                                    html.A(href= 'https://github.com/Sepideh-hd', className='fa fa-github social-link ', target="_blank"),
+                                    html.A(href= 'https://www.linkedin.com/in/sepideh-hosseini-dehkordi-16452610a/', className='fa fa-linkedin social-link', target="_blank")
+                                    
+                                ])
+                            ]),
+
+                            html.Div(style={'float': 'left','width':'20%'}, children=[
+                                html.H6("Lamees Kadhim"),
+                                html.Img(src=app.get_asset_url('lamees.png'), className='avatar'),
+                                html.Div(children=[
+                                    html.A(href= 'https://github.com/LameesKadhim', className='fa fa-github social-link ', target="_blank"),
+                                    html.A(href= 'https://www.linkedin.com/in/lamees-mohammed-nazar-976587119/', className='fa fa-linkedin social-link', target="_blank")
+                                    
+                                ])
+                            ]),
 
 
-                        html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Tamanna"),
-                            html.Img(src=app.get_asset_url('tamanna.jpg'), className='avatar'),
-                            html.Div(children=[
-                                html.A(href= 'https://github.com/tamanna18', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/tamanna-724345189/', className='fa fa-linkedin social-link', target="_blank")
-                                
-                            ])
-                        ]),
+                            html.Div(style={'float': 'left','width':'20%'}, children=[
+                                html.H6("Tamanna"),
+                                html.Img(src=app.get_asset_url('girl.png'), className='avatar'),
+                                html.Div(children=[
+                                    html.A(href= 'https://github.com/tamanna18', className='fa fa-github social-link ', target="_blank"),
+                                    html.A(href= 'https://www.linkedin.com/in/tamanna-724345189/', className='fa fa-linkedin social-link', target="_blank")
+                                    
+                                ])
+                            ]),
 
-                        html.Div(style={'float': 'left','width':'20%'}, children=[
-                            html.H6("Kunal"),
-                            html.Img(src=app.get_asset_url('kunal.png'), className='avatar'),
-                            html.Div(children=[
-                                html.A(href= 'https://github.com/kunalait', className='fa fa-github social-link ', target="_blank"),
-                                html.A(href= 'https://www.linkedin.com/in/kunal-2375b515a/', className='fa fa-linkedin social-link', target="_blank")
-                                
+                            html.Div(style={'float': 'left','width':'20%'}, children=[
+                                html.H6("Kunal"),
+                                html.Img(src=app.get_asset_url('boy.jpg'), className='avatar'),
+                                html.Div(children=[
+                                    html.A(href= 'https://github.com/kunalait', className='fa fa-github social-link ', target="_blank"),
+                                    html.A(href= 'https://www.linkedin.com/in/kunal-2375b515a/', className='fa fa-linkedin social-link', target="_blank")
+                                    
+                                ])
                             ])
                         ])
-                    ])
+                ])
             ])
 
         ]),
-<<<<<<< HEAD
-        dcc.Tab(label='Dataset'),
-        # Start Dashboard Tab
-        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[
-=======
 
         # Start Dataset Tab **********************************
         dcc.Tab(label=' DATASET', className='tab-icon fa fa-database' , children=[
-             # About Dataset
-             html.Div(className='row', children=[
-                html.Label(className='block-caption', children=['About Dataset']),
-                    html.Label(className='text-content', children=[
-                        'This dataset was built with the purpose of helping students in shortlisting universities with their profiles. The predicted output gives them a fair idea about their chances for a particular university. We use the dataset which is available in Link below: '
+            # Start Overlay Section *********************************
+            html.Section(className='row overlay-img', children=[
+                html.Div(className='overlay', children=[
+                    html.Div(className='banner', children=[
+                        html.H2('Dataset Details')
                     ])
-                ]),
-                html.Div(className='row', style={'text-align': 'left' , 'margin-down':'5px'} , children=[
-                html.A(
-                        "View our dataset source link", href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv', target="_blank")
-                ]),
-
-            html.Div(className='row', children=[
-                html.Label(className='text-content', children=[
-                    'The size of dataset is 500 records and 9 columns and it contains several parameters which are considered important during the application for Masters Programs. depending on the following factors :'
-                    ])
-                ]),
-
->>>>>>> 5d1806855b360e3811ef066a046eecc4a403750c
-            html.Div(className='row', children=[            
-                dash_table.DataTable(
-                    id='table',
-                    columns=[{"name": i, "id": i} for i in df1.columns],
-                    data=df1.to_dict('records')
-                )
+                ])
             ]),
+            # End Overlay Section *************************************
+
+             # About Dataset
+             html.Div(className='container', children=[
+                html.Label('DATASET', className='block-caption'),
+                html.Div(className='row', style={'text-align':'center'}, children=[
+                    html.P('''This dataset was built with the purpose of helping students in shortlisting 
+                        universities with their profiles. The predicted output gives them a fair idea 
+                        about their chances for a particular university. 
+                        We use the dataset which is available in Link below: ''',
+                        className='text-content')
+                ]),
+
+                html.Div(className='row', style={'text-align': 'left' , 'margin-down':'5px'} , children=[
+                    html.A(
+                            "View our dataset source link",
+                             href='https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv',
+                            target="_blank")
+                    ]),
+
+
+                html.Div(className='row', children=[
+                    html.H6('Attributes Of Dataset', className='block-caption'),
+                    html.Ul(className='text-content', children=[
+                        html.Li('Serial: Students serial number'),
+                        html.Li('GRE Score (130-170)'),
+                        html.Li('TOEFL Score (60-120)'),
+                        html.Li('SOP ( Statement of Purpose)'),
+                        html.Li('LOR(Letter of Recommendation) Strength(out of 5)'),
+                        html.Li('Research Experience ( 0 for no experience and 1 for having an experience)'),
+                        html.Li('Undergraduate CGPA is the average of grade points obtained in all the subject (out of 10)'),
+                        html.Li('Chance of Admit (range from  0 to 1) --The Label')
+                    ]),
+
+                    html.P(
+                        '''The size of dataset is 500 records and 9 columns and it contains
+                         several parameters which are considered important during the application for Masters Programs. 
+                        depending on the following factors :''',
+                        className='text-content')
+                    ]),
+
+                html.Div(className='row table', children=[            
+                    dash_table.DataTable(
+                        id='table',
+                        columns=[{"name": i, "id": i} for i in df1.columns],
+                        data=df1.to_dict('records'),
+                        style_cell={'textAlign': 'center'},
+                        style_header={
+                            'backgroundColor': '#276678',
+                            'color':'#FFFF',
+                            'fontWeight': 'bold'}
+                    )
+                ]),
+             ])
+
         ]),
         
         # Start Dashboard Tab ******************************
-        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[            
-            html.Div(className='row', children=[
-                html.Div(className='six columns', children=[
-                    html.Div(className='row', children=[
-                        dcc.Graph(
-                            id='bar',
-                            figure= lorVSadmit_fig                                 
-                        )  
-                    ]),          
-                    html.Div(className='row', children=[
-                        dcc.Graph(
-                            id='scatter1',
-                            figure= gerVSadmit_fig
-                        )
-                        
-                    ]),          
-                    html.Div(className='row', children=[
-                        dcc.Graph(
-                            id='scatter',
-                            figure= cgpaVSadmit                                
-                        )                       
+        dcc.Tab(label=' DASHBOARD', className='tab-icon fa fa-bar-chart' , children=[ 
+            
+            # Start Overlay Section *********************************
+            html.Section(className='row overlay-img', children=[
+                html.Div(className='overlay', children=[
+                    html.Div(className='banner', children=[
+                        html.H2('Data Visualization'),
+                        html.P("This dashboard show the relations between the features in the dataset")
                     ])
-                ]),
-                html.Div(className='six columns', children=[                             
-                    html.Div(className='row', children=[                    
-                        dcc.Graph(
-                            id='pie',
-                            figure= pie_fig                                 
-                        )
-                                           
-                    ]),     
-                    html.Div(className='row', children=[
-                        dcc.Graph(
-                            id='scatter2',
-                            figure= toeflVSadmit_fig
-                        )
-                    ]),   
-                    html.Div(className='row', children=[
-                        dcc.Graph(
-                            id='line',
-                            figure= rateVSadmit_fig                                 
-                        )
-                    ])
-                 ]),
+                ])
+            ]),
+            # End Overlay Section *************************************
+
+            html.Div(className='container', children=[
+                html.Div(className='row', children=[
+                    html.Div(className='six columns', children=[
+                        html.Div(className='row box', children=[
+                            dcc.Graph(
+                                id='bar',
+                                figure= lorVSadmit_fig                          
+                            )  
+                        ]),          
+                        html.Div(className='row box', children=[
+                            dcc.Graph(
+                                id='scatter1',
+                                figure= gerVSadmit_fig
+                            )
+                            
+                        ]),          
+                        html.Div(className='row box', children=[
+                            dcc.Graph(
+                                id='scatter',
+                                figure= cgpaVSadmit                                
+                            )                       
+                        ])
+                    ]),
+                    html.Div(className='six columns', children=[                             
+                        html.Div(className='row box', children=[                    
+                            dcc.Graph(
+                                id='pie',
+                                figure= pie_fig                                 
+                            )
+                                            
+                        ]),     
+                        html.Div(className='row box', children=[
+                            dcc.Graph(
+                                id='scatter2',
+                                figure= toeflVSadmit_fig
+                            )
+                        ]),   
+                        html.Div(className='row box', children=[
+                            dcc.Graph(
+                                id='line',
+                                figure= rateVSadmit_fig                                 
+                            )
+                        ])
+                    ]),
+                ])
             ])
+
         ]), #End Dashboard Tab ******************************
 
         # Start ML tab
-        dcc.Tab(label=' ML', className='tab-icon ', children=[
-            html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
-            html.Div(className='row', style={'margin':'15px'} , children=[ 
-                html.Div(className='twelve columns', children=[
-                    html.P('Post graduate degrees are becoming more and more a desired degree all over the world. It is an advantage for the student to have an idea a head about their probability of being admitted to a university, as a result the students can work on enhancing the language test or the degree for their currently running courses... etc.In our project we use a regression task to predict the student admission percentage.'),
-                    html.H6('Steps to build our model:',style={'font-weight':'bold'}),
-                    html.Ul(id='model-list', children=[
-                        html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
-                        html.Li('Apply different machine learning regression models'),
-                        html.Li('Select the best model'),
-                        html.Li('Save the model')
-                        ]),
-                    html.P('In our task we used Random Forest Regressor model from scikit-learn library'),
-                    html.H6('Random Forest method explanation:',style={'font-weight':'bold'}),
-                    html.P('Random forests are an ensemble learning method for classification, regression and other tasks that work by building a multitude of decision trees at training time and generating the class that is the class type (classification) or mean/average prediction (regression) of the individual trees'),
-                    html.Div(className='row', children=[
-                            dcc.Graph(figure=importance_fig)
-                         ]),
-                    html.H6('Evaluation',style={'font-weight':'bold'}),
-                    html.P('We test our model on the test set and the random forest regressor score was 85%'),
-                    html.Div(className='row', children=[
-                           dcc.Graph(figure=regression_fig)
-                     ]),
-               ])   
-           ]),
+        dcc.Tab(label=' MACHINE LEARNING', className='tab-icon fa fa-lightbulb-o', children=[
+            # Start Overlay Section *********************************
+            html.Section(className='row overlay-img', children=[
+                html.Div(className='overlay', children=[
+                    html.Div(className='banner', children=[
+                        html.H2('Machine Learning'),
+                    #    html.P("This dashboard show the relations between the features in the dataset")
+                    ])
+                ])
+            ]),
 
+            # End Overlay Section *************************************
+            html.Div(className='container', children=[
+                html.H2('Model Explanation', style={'font-style':'bold','text-align':'center'}),
+                html.Div(className='row', style={'margin':'15px'} , children=[ 
+                    html.Div(className='twelve columns', children=[
+                        html.P('Post graduate degrees are becoming more and more a desired degree all over the world. It is an advantage for the student to have an idea a head about their probability of being admitted to a university, as a result the students can work on enhancing the language test or the degree for their currently running courses... etc.In our project we use a regression task to predict the student admission percentage.'),
+                        html.H6('Steps to build our model:',style={'font-weight':'bold'}),
+                        html.Ul(id='model-list', children=[
+                            html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
+                            html.Li('Apply different machine learning regression models'),
+                            html.Li('Select the best model'),
+                            html.Li('Save the model')
+                            ]),
+                        html.P('In our task we used Random Forest Regressor model from scikit-learn library'),
+                        html.H6('Random Forest method explanation:',style={'font-weight':'bold'}),
+                        html.P('Random forests are an ensemble learning method for classification, regression and other tasks that work by building a multitude of decision trees at training time and generating the class that is the class type (classification) or mean/average prediction (regression) of the individual trees'),
+                        html.Div(className='row', children=[
+                                dcc.Graph(figure=importance_fig)
+                            ]),
+                        html.H6('Evaluation',style={'font-weight':'bold'}),
+                        html.P('We test our model on the test set and the random forest regressor score was 85%'),
+                        html.Div(className='row', children=[
+                            dcc.Graph(figure=regression_fig)
+                        ]),
+                    ])   
+                ]),
+            ])
           
         ]),
-        #End ML Tab
+        #End ML Tab*********************************************
+
         # Start Prediction Tab *********************************************
-        dcc.Tab(label=' Prediction', className='tab-icon fa fa-line-chart',  children=[
-                
+        dcc.Tab(label=' PREDICTION', className='tab-icon fa fa-line-chart',  children=[
+            # Start Overlay Section *********************************
+            html.Section(className='row overlay-img', children=[
+                html.Div(className='overlay', children=[
+                    html.Div(className='banner', children=[
+                        html.H2('Model Prediction'),
+                        html.P("Enter your information to get your expected chance of admission")
+                    ])
+                ])
+            ]),
+            # End Overlay Section *************************************
+
+            html.Div(className='container', children=[
                 html.Div(className='row', style={'margin':'15px'} , children=[
                     # Start Left Side  *****************************
                     html.Div(className='five columns border-style', children=[
@@ -375,55 +421,44 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                             html.Label('CGPA')
 
                         ]),
-                        html.Div(style={'padding':'5px'}, children=[
-                            daq.NumericInput(
-                                            id = 'CGPAInput',
-                                            min=1,
-                                            max=10,
-                                            value=5,
-                                            size = 200
-                                        ) 
-                                
-                        ]),
 
-                        # GRE Score Slider ************************************
-                        html.Div(className='row',style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            html.Div(style={'padding':'5px'}, children=[
+                                daq.NumericInput(
+                                                id = 'CGPAInput',
+                                                min=1,
+                                                max=10,
+                                                value=5,
+                                                size = 200) 
+                                    
+                            ]),
+
+                            # GRE Score Slider ************************************
+                            html.Div(className='row',style={'padding':'5px'}, children=[
                                 html.Label('GRE score')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 daq.Slider(id = 'GRESlider', min=130, max=170, value=140,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
                                 )
-                        #    ])
-                        ]),
+                            ]),
 
-                        # TOFEL Slider ************************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            # TOFEL Slider ************************************
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('TOEFL iBT Score')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 daq.Slider(id = 'TOEFLSlider', min=61, max=120, value=90,
                                     handleLabel={"showCurrentValue": True, "label": "VALUE"},
                                     step=1
                                 )
-                        #    ])
-                        ]),
+                            ]),
 
-                        # Rating Div *************************************
-                        html.Div(style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            # Rating Div *************************************
+                            html.Div(style={'padding':'5px'}, children=[
                                 html.Label('University Rating')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 dcc.Dropdown(
                                     id = 'RatingDrop',
                                     options=[
@@ -435,17 +470,13 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='1'
                                 )
-                        #    ])
-                        ]),
+                            ]),
 
-                        # LOR Div *****************************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns',style={'width':'100%'}, children=[
+                            # LOR Div *****************************************
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('Letter Of Recommendation')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 dcc.Dropdown(
                                     id = 'LORDrop',
                                     options=[
@@ -462,17 +493,13 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='0.5'
                                 )
-                        #    ])
-                        ]),
+                            ]),
 
-                        # SOP DIv ***************************************
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            # SOP DIv ***************************************
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 html.Label('Statement of Purpose')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
                                 dcc.Dropdown(
                                     id = 'SOPDrop',
                                     options=[
@@ -484,49 +511,46 @@ app.layout = html.Div(style={'margin':'0'}, children=[
                                     ],
                                     value='1'
                                 )
-                        #    ])
-                        ]),
+                            ]),
 
-                
-                        # Reaserch DIv ************************************
-                        html.Div(style={'padding':'5px'}, children=[
-                        #    html.Div(className='six columns', children=[
+                    
+                            # Reaserch DIv ************************************
+                            html.Div(style={'padding':'5px'}, children=[
                                 html.Label('Reasearch Experience')
-                        #    ]),
-                        ]),
-                        html.Div(className='row', style={'padding':'5px'}, children=[
-                            html.Div(className='six columns', children=[
-                                dcc.RadioItems(
-                                    id = 'ResearchRadio',
-                                    options=[
-                                        {'label': 'YES', 'value': '1'},
-                                        {'label': 'NO', 'value': '0'} 
-                                    ],
-                                    value='0'
-                                )  
+                            ]),
+                            html.Div(className='row', style={'padding':'5px'}, children=[
+                                html.Div(className='six columns', children=[
+                                    dcc.RadioItems(
+                                        id = 'ResearchRadio',
+                                        options=[
+                                            {'label': 'YES', 'value': '1'},
+                                            {'label': 'NO', 'value': '0'} 
+                                        ],
+                                        value='0'
+                                    )  
+                                ])
                             ])
-                        ])
-                    ]),
-                    # End Left Side *****************************
-
-
-                    # Start Right Side ***************************
-                    html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
-                        
-                        #Admission prediction Text
-                        html.Div(children=[
-                                html.H6("Admission Probablity"),
-                                html.H5(id="prediction_result", 
-                                        style={'font-weight':'bold', 'font-size':'40px'}), 
                         ]),
+                        # End Left Side *****************************
 
-                       
-             
-                        # Prediction bar 
-                        dcc.Graph(id = 'barGraph',className='prediction-bar')
-                        
+
+                        # Start Right Side ***************************
+                        html.Div(className='seven columns' , style={'text-align' : 'center', 'margin':'15px'}, children=[
+                            
+                            #Admission prediction Text
+                            html.Div(children=[
+                                    html.H6("Admission Probablity" , className='block-caption'),
+                                    html.H5(id="prediction_result", 
+                                            style={'font-weight':'bold', 'font-size':'40px', 'color':'#1687a7'}), 
+                            ]),
+                            
+                            # Prediction bar 
+                            dcc.Graph(id = 'barGraph',className='prediction-bar')
+
+                        ])
                     ])
                 ])
+
             ]), # ***END ML TAB****************************************
 
         
