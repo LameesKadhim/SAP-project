@@ -1,10 +1,10 @@
 # Student Admission Prediction (SAP-Project)
 
 <p align="center">
-<img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo.png" width="200" height="170">
+<img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo.jpg" width="200" height="170">
 </p>
 
-# Aim
+# Project Idea
 This is a student project about predicting the chance of admission. For this project we are using Graduate Admission Dataset from Kaggle. We will use machine learning to analyze the data, find a model to predict the University Ranking and then visualize the result.
 
   
