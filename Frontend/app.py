@@ -251,7 +251,7 @@ app.layout = html.Div( children=[
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
-                        html.H2('Dataset Details'),
+                        html.H2('Dataset Details',style={'font-size':'32pt'}),
                         html.P("Explanation of the different features and the output of the dataset")
                     ])
                 ])
@@ -320,7 +320,7 @@ app.layout = html.Div( children=[
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
-                        html.H2('Data Visualization'),
+                        html.H2('Data Visualization',style={'font-size':'32pt'}),
                         html.P("This dashboard show the relations between the features in the dataset")
                     ])
                 ])
@@ -382,7 +382,7 @@ app.layout = html.Div( children=[
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
-                        html.H2('Machine Learning'),
+                        html.H2('Machine Learning',style={'font-size':'32pt'}),
                         html.P("Model explanation, feature impact and model evaluation")
                     ])
                 ])
@@ -445,7 +445,7 @@ app.layout = html.Div( children=[
             html.Section(className='row overlay-img', children=[
                 html.Div(className='overlay', children=[
                     html.Div(className='banner', children=[
-                        html.H2('Model Prediction'),
+                        html.H2('Model Prediction',style={'font-size':'32pt'}),
                         html.P("Enter your information to get your expected chance of admission")
                     ])
                 ])
