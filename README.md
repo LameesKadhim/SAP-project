@@ -1,7 +1,7 @@
 # Student Admission Prediction (SAP-Project)
 
 <p align="center">
-<img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo.png" width="200" height="170">
+<img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo SAP.jpg" width="200" height="170">
 </p>
 
 # Aim
