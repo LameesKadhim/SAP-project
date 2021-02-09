@@ -8,7 +8,7 @@
 This is a student project about predicting the chance of admission. For this project we are using Graduate Admission Dataset from Kaggle. We will use machine learning to analyze the data, find a model to predict the University Ranking and then visualize the result.
 
   
-# Requirments and Prepration
+# Requirments and Preparation
 
   * Required Libraries
     + [Dash](https://plotly.com/dash/)
@@ -51,16 +51,19 @@ This is a student project about predicting the chance of admission. For this pro
 ## Visualization:
 
 ###  Home
-![Home](https://user-images.githubusercontent.com/57901189/106772583-744bd900-6640-11eb-9f9e-d0dcac412b93.JPG)
+![Home](https://user-images.githubusercontent.com/57901189/107371093-258cbc00-6ae4-11eb-8c8b-c059b9f9cc26.png)
+----------------------------------------------
+###  Dataset
+![Dataset](https://user-images.githubusercontent.com/57901189/107371106-2887ac80-6ae4-11eb-9198-cca7ff58b900.png)
 ----------------------------------------------
 ### Dashboard
-![Dashboard](https://user-images.githubusercontent.com/57901189/106772637-8299f500-6640-11eb-823a-cf1b6b09be3c.JPG)
+![Dashboard'](https://user-images.githubusercontent.com/57901189/107371115-2c1b3380-6ae4-11eb-9044-572573527dec.png)
 ----------------------------------------------
 ### Machine Learning
-![ML](https://user-images.githubusercontent.com/57901189/106772679-8cbbf380-6640-11eb-8ac6-eef23753b4f1.JPG)
+![ML](https://user-images.githubusercontent.com/57901189/107371134-30475100-6ae4-11eb-8494-f6084c03b9a5.png)
 ----------------------------------------------
 ### Prediction
-![prediction](https://user-images.githubusercontent.com/57901189/106772711-93e30180-6640-11eb-9bb4-98d5696e49c8.JPG)
+![Prediction](https://user-images.githubusercontent.com/57901189/107371144-34736e80-6ae4-11eb-8afb-3644751a2d65.png)
 
 
 
@@ -82,6 +85,6 @@ This is a student project about predicting the chance of admission. For this pro
   
   * <a href="https://github.com/kunalait" target="_blank">Kunal</a>
   
-  * <a href="https://github.com/" target="_blank">Sepideh Hosseini Dehkordi</a>
+  * <a href="https://github.com/Sepideh-hd" target="_blank">Sepideh Hosseini Dehkordi</a>
   
 
