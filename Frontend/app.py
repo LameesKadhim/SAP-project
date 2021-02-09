@@ -155,7 +155,7 @@ app.layout = html.Div( children=[
                     html.Div(className='nine columns', children=[
                         html.H2('Motivation', className='block-caption'),
                         html.P('''Post graduate degrees are becoming more and more desired degrees all over the world. 
-                                It is an advantage for the student to have an idea a head about their probability
+                                It is an advantage for the students to have an idea a head about their probability
                                 of being admitted to a university, as a result the students can work on enhancing 
                                 the language test or the degree for their currently running courses and so on.
                                 In our project we use a regression task to predict the student admission percentage.''',
@@ -172,10 +172,10 @@ app.layout = html.Div( children=[
                             html.Div(children=[
                                 html.P('''Our university acceptance calculator can help you
                                         to find the probability of getting accepted into a 
-                                        particular university based on your profile, and it’s 
-                                        completely free. Enter your scores and GPA to see our 
+                                        particular university based on your profile, and it is 
+                                        completely free. Enter your language scores and CGPA to see the
                                         predicted output. This output will give you a fair 
-                                        idea about your chances for a particular university.''', 
+                                        idea about your chance for being admitted to a particular university.''', 
                                         className='text-content')
                             ])
                         ])
@@ -393,7 +393,7 @@ app.layout = html.Div( children=[
             html.Div(className='container', children=[
                 html.H6('Steps to build our model:', className='block-caption'),
                 html.Ul(id='model-list',className='text-content', children=[
-                    html.Li('data preprocessing(remove null values, normalization, map GRE score to the new scale)'),
+                    html.Li('Data preprocessing (remove null values, normalization, map GRE score to the new scale)'),
                     html.Li('Apply different machine learning regression models'),
                     html.Li('Select the best model'),
                     html.Li('Save the model')
