@@ -166,7 +166,7 @@ app.layout = html.Div( children=[
 
                 html.Section(className='section objective-overlay-img', children=[
                 html.Div(className='objective-overlay', children=[
-                    html.Div(className='container', children=[
+                    html.Div(className='container',style={'padding-top':'5px'}, children=[
                     html.H2('PROJECT OBJECTIVE',className='objective-H2'),
                         html.Div(className='row', children=[ 
                             html.Div(children=[
