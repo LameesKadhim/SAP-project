@@ -86,34 +86,26 @@ This is a student project about predicting the chance of admission. For this pro
   
 * <b> Step 2. Initialize the folder with git and a virtualenv </b>
 
-  $ git init      // initializes an empty git repo
-  
-  $ virtualenv venv // creates a virtualenv called "venv"
-  
-  $ venv\Scripts\activate // Activate the virtual environment for windows
+    $ git init      // initializes an empty git repo
+
+    $ virtualenv venv // creates a virtualenv called "venv"
+
+    $ venv\Scripts\activate // Activate the virtual environment for windows
   
     -uses the virtualenv for linux and Macos:    $ source venv/bin/activate 
     
   You will need to reinstall your app's dependencies with this virtualenv:
 
-  <code> $ pip install dash <code>
-  
-  <code> $ pip install plotly </code>   
+     $ pip install dash 
+
+     $ pip install plotly
   
   You will also need a new dependency, gunicorn, for deploying the app:
   
-  <code> $ pip install gunicorn </code>
+     $ pip install gunicorn 
   
 * <b> Step 3. Initialize the folder with the (app.py), a .gitignore file, requirements.txt, and a Procfile for deployment </b>
-     content of .gitignore file:
-     
-     <code> venv </code>
-     
-     <code> *.pyc </code>
-     
-     <code> .DS_Store </code>
-     
-     <code> .env </code>
+ 
      
   <b> content of Procfile is</b> --> web: gunicorn app:server
    
@@ -121,17 +113,18 @@ This is a student project about predicting the chance of admission. For this pro
    
    requirements.txt describes your Python dependencies. You can fill this file in automatically with:
    
-  <code> $ pip freeze > requirements.txt </code>
+    $ pip freeze > requirements.txt 
+   
    
 * <b> Step 4 Initialize Heroku, add files to Git, and deploy </b>
 
-  <code> $ heroku create my-dash-app # change my-dash-app to a unique name </code>
-  
-  <code> $ git add . # add all files to git </code>
-  
-  <code> $ git commit -m 'Initial app boilerplate' </code>
-  
-  <code> $ git push heroku master # deploy code to heroku </code>
+    $ heroku create my-dash-app # change my-dash-app to a unique name 
+
+    $ git add . # add all files to git 
+
+    $ git commit -m 'Initial app boilerplate' 
+
+    $ git push heroku master # deploy code to heroku 
    
 
 # Contributors
