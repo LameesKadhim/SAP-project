@@ -76,42 +76,62 @@ This is a student project about predicting the chance of admission. For this pro
 # SAP-Project Video Trailer:
 
 # Deployment steps on Heroku
-* Step 1. Create a new folder for your project:
+
+* <b> Step 1. Create a new folder for your project: </b>
+
   $ mkdir sap-project
+  
   $ cd sap-project
   
-* Step 2. Initialize the folder with git and a virtualenv
-  <b>$ git init </b>       # initializes an empty git repo
-  <b>$ virtualenv venv</b> # creates a virtualenv called "venv"
-  <b>$ venv\Scripts\activate </b> # Activate the virtual environment for windows
-    -uses the virtualenv for linux and Macos:    <b>$ source venv/bin/activate </b>
+  
+* <b> Step 2. Initialize the folder with git and a virtualenv </b>
+
+  $ git init      // initializes an empty git repo
+  
+  $ virtualenv venv // creates a virtualenv called "venv"
+  
+  $ venv\Scripts\activate // Activate the virtual environment for windows
+  
+    -uses the virtualenv for linux and Macos:    $ source venv/bin/activate 
+    
   You will need to reinstall your app's dependencies with this virtualenv:
 
-  <b>$ pip install dash</b>
-  <b>$ pip install plotly</b>   
+  <code> $ pip install dash <code>
+  
+  <code> $ pip install plotly </code>   
   
   You will also need a new dependency, gunicorn, for deploying the app:
-  <b>$ pip install gunicorn</b>
   
-* Step 3. Initialize the folder with the (app.py), a .gitignore file, requirements.txt, and a Procfile for deployment
-  <b> content of .gitignore file:</b>
-      venv
-     *.pyc
-     .DS_Store
-     .env 
+  <code> $ pip install gunicorn </code>
+  
+* <b> Step 3. Initialize the folder with the (app.py), a .gitignore file, requirements.txt, and a Procfile for deployment </b>
+     content of .gitignore file:
+     
+     <code> venv </code>
+     
+     <code> *.pyc </code>
+     
+     <code> .DS_Store </code>
+     
+     <code> .env </code>
      
   <b> content of Procfile is</b> --> web: gunicorn app:server
    
-   <b>creation of requirements.txt file:</b>
-   requirements.txt describes your Python dependencies. You can fill this file in automatically with:
-   $ pip freeze > requirements.txt
+  <b> creation of requirements.txt file: </b>
    
-* Step 4 Initialize Heroku, add files to Git, and deploy
+   requirements.txt describes your Python dependencies. You can fill this file in automatically with:
+   
+  <code> $ pip freeze > requirements.txt </code>
+   
+* <b> Step 4 Initialize Heroku, add files to Git, and deploy </b>
 
-   $ heroku create my-dash-app # change my-dash-app to a unique name
-   $ git add . # add all files to git
-   $ git commit -m 'Initial app boilerplate'
-   $ git push heroku master # deploy code to heroku
+  <code> $ heroku create my-dash-app # change my-dash-app to a unique name </code>
+  
+  <code> $ git add . # add all files to git </code>
+  
+  <code> $ git commit -m 'Initial app boilerplate' </code>
+  
+  <code> $ git push heroku master # deploy code to heroku </code>
    
 
 # Contributors
