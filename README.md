@@ -104,7 +104,7 @@ This is a student project about predicting the chance of admission. For this pro
   
      $ pip install gunicorn 
   
-* <b> Step 3. Initialize the folder with the (app.py), a .gitignore file, requirements.txt, and a Procfile for deployment </b>
+* <b> Step 3. Initialize the folder with the (app.py), requirements.txt, and a Procfile for deployment </b>
  
      
   <b> content of Procfile is</b> --> web: gunicorn app:server
