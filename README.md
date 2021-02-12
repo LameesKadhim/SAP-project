@@ -21,7 +21,7 @@ This is a student project about predicting the chance of admission. For this pro
     * Create a virtual environment for the project: <b> python -m venv venv </b>
     * Activate the virtual environment for windows: <b> venv\Scripts\activate </b>
       - Activate the virtual environment for Linux/macOS: <b> source venv/bin/activate </b>
-    * Install required libraries in the project: </b> pip install dash pandas numpy joblib </b>
+    * Install required libraries in the project: </b> pip install dash pandas </b>
     * Start server: <b> python app.py </b>
 
  
