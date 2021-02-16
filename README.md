@@ -74,6 +74,7 @@ This is a student project about predicting the chance of admission. For this pro
   https://predict-student-admission.herokuapp.com/
 
 # SAP-Project Video Trailer:
+  https://youtu.be/rXDHiqIxYuQ
 
 # Deployment steps on Heroku
 
