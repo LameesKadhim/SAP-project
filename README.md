@@ -47,6 +47,11 @@ This is a student project about predicting the chance of admission. For this pro
       
 ## Tools:
 * DASH/Plotly
+      
+## Project Arcithecture:
+* Machine learning model: regression with RandonForestRegressor
+* Backend: Flask which is embedded in Dash
+* Frontend: Dash/Plotly
 
 ## Visualization:
 
