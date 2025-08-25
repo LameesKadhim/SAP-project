@@ -20,6 +20,12 @@ The project uses the following key libraries:
 - [Plotly](https://plotly.com/) - Interactive visualizations
 - [Dash-DAQ](https://dash.plotly.com/dash-daq) - Advanced Dash components
 
+### Dependencies Management
+All dependencies are managed through `requirements.txt` with specific versions for compatibility:
+- **Core Dependencies**: dash, pandas, numpy, scikit-learn, joblib, plotly
+- **UI Components**: dash-daq, dash-table
+- **Development**: gunicorn (for deployment)
+
 ## Quick Start Guide
 
 ### 1. Clone the Repository
@@ -56,7 +62,12 @@ python retrain_model.py
 ### 5. Start the Application
 ```bash
 cd Frontend
+
+# Run the original application
 python app.py
+
+# OR run the new modular application
+python app_refactored.py
 ```
 
 ### 6. Access the Application
@@ -67,15 +78,52 @@ http://127.0.0.1:8050/
 
 ## Recent Updates and Fixes
 
+### ✅ Major Refactoring - Modular Design Implementation
+- **Complete Code Restructuring**: Refactored monolithic `app.py` into modular architecture
+- **Separation of Concerns**: Each component now has its own dedicated module
+- **Enhanced Maintainability**: Easy to modify, test, and extend individual components
+- **Professional Code Structure**: Following industry best practices and design patterns
+
+### ✅ New Modular Architecture
+```
+Frontend/
+├── config/
+│   ├── __init__.py
+│   └── settings.py          # All configuration constants
+├── data/
+│   ├── __init__.py
+│   └── data_loader.py       # Data loading and preprocessing
+├── models/
+│   ├── __init__.py
+│   └── model_manager.py     # Model loading and predictions
+├── visualizations/
+│   ├── __init__.py
+│   └── charts.py           # All chart creation functions
+├── components/
+│   ├── __init__.py
+│   ├── header.py           # Header component
+│   ├── home_tab.py         # Home tab component
+│   ├── dataset_tab.py      # Dataset tab component
+│   ├── dashboard_tab.py    # Dashboard tab component
+│   ├── ml_tab.py          # Machine Learning tab component
+│   └── prediction_tab.py   # Prediction tab component
+├── callbacks/
+│   ├── __init__.py
+│   └── prediction_callback.py # Prediction callback logic
+├── app.py                  # Original monolithic application
+└── app_refactored.py       # New modular application
+```
+
 ### ✅ Compatibility Fixes
 - **Updated Dash imports**: Modernized from deprecated `dash_html_components` to `from dash import html, dcc, dash_table`
 - **Fixed Dash server**: Updated from deprecated `app.run_server()` to `app.run()`
 - **Model compatibility**: Retrained RandomForest model for scikit-learn 1.7.1 compatibility
 - **Added retraining script**: `Backend/retrain_model.py` for easy model updates
+- **Fixed dash_daq import**: Corrected import statement for Dash-DAQ components
 
 ### ✅ Project Structure
 - **Backend**: Machine learning model and training scripts
-- **Frontend**: Dash web application with interactive interface
+- **Frontend**: Dash web application with interactive interface (now modular)
 - **Dataset**: Graduate admission data for training and visualization
 - **Requirements**: Comprehensive dependency management
 
@@ -84,6 +132,9 @@ http://127.0.0.1:8050/
 - **Data Visualizations**: Comprehensive charts and graphs
 - **Model Performance**: Feature importance and evaluation metrics
 - **Responsive Design**: Modern, user-friendly interface
+- **Modular Architecture**: Clean, maintainable, and scalable codebase
+- **Error Handling**: Comprehensive error handling and logging throughout
+- **Type Safety**: Full type hints and documentation for better code clarity
 
 ## Implementation Approach   
 
@@ -112,8 +163,10 @@ https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predic
 ### Project Architecture:
 - **Machine Learning Model**: RandomForestRegressor (78.53% accuracy)
 - **Backend**: Python with scikit-learn
-- **Frontend**: Dash/Plotly web application
+- **Frontend**: Dash/Plotly web application (modular design)
 - **Model Persistence**: Joblib for model saving/loading
+- **Code Organization**: Modular architecture with separation of concerns
+- **Error Handling**: Comprehensive logging and error management
 
 ## Visualization Features
 
@@ -165,12 +218,26 @@ https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predic
 4. **Port Already in Use**:
    - Change the port in `app.py` or kill the existing process
 
+5. **Modular Application Issues**:
+   - Both `app.py` (original) and `app_refactored.py` (modular) are available
+   - Use `app_refactored.py` for the new modular version
+   - All functionality is identical between versions
+
+6. **Dash-DAQ Import Issues**:
+   - Fixed import statement: `import dash_daq as daq`
+   - Ensure `dash-daq` is installed: `pip install dash-daq`
+
 ## Deployment
 
 ### Local Development:
 ```bash
 cd Frontend
+
+# Run original application
 python app.py
+
+# OR run modular application
+python app_refactored.py
 ```
 
 ### Production Deployment (Heroku):
@@ -191,10 +258,27 @@ python app.py
 - [Kunal](https://github.com/kunalait)
 - [Sepideh Hosseini Dehkordi](https://github.com/Sepideh-hd)
 
+## Code Quality and Standards
+
+### ✅ Modular Design Benefits
+- **Maintainability**: Each component is isolated and easy to modify
+- **Testability**: Individual modules can be tested independently
+- **Scalability**: Easy to add new features or components
+- **Reusability**: Components can be reused across different parts
+- **Error Handling**: Comprehensive error handling and logging
+- **Documentation**: Full type hints and docstrings
+
+### ✅ Development Best Practices
+- **Separation of Concerns**: Each module has a single responsibility
+- **Factory Pattern**: Clean initialization patterns for components
+- **Configuration Management**: Centralized settings management
+- **Error Logging**: Comprehensive logging for debugging
+- **Type Safety**: Full type annotations for better code clarity
+
 ## License
 This project is part of the Learning Analysis course (WS20/21) by the Datology Group.
 
 ---
 
-**Note**: This project has been updated for modern Python and Dash compatibility. The model has been retrained for scikit-learn 1.7.1+ compatibility.
+**Note**: This project has been updated for modern Python and Dash compatibility. The model has been retrained for scikit-learn 1.7.1+ compatibility. The codebase has been refactored into a modular architecture following industry best practices.
 
