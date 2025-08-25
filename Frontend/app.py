@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import dash
-import dash_html_components as html
-import dash_core_components as dcc
-import dash_table
+from dash import html, dcc, dash_table
 import pandas as pd
 import dash_daq as daq
 import cufflinks as cf
@@ -669,4 +667,4 @@ def update_prediction(GRE, TOEFL, Rating,SOP,LOR, CGPA, Research):
     return prediction, figure 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
