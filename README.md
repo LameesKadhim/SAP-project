@@ -1,4 +1,4 @@
-# Student Admission Prediction (SAP-Project)
+# Student Admission Prediction
 
 <p align="center">
 <img src="https://github.com/LameesKadhim/SAP-project/blob/main/Frontend/assets/logo.jpg" width="200" height="170">
