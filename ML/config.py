@@ -1,5 +1,5 @@
 """
-Configuration settings for the Backend module.
+Configuration settings for the ML module.
 """
 
 # Dataset configuration

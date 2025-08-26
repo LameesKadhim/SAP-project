@@ -10,7 +10,7 @@ EXTERNAL_STYLESHEETS = [
 
 # File paths
 DATASET_PATH = '../Dataset/admission_predict_V1.2.csv'
-MODEL_PATH = '../Backend/model_RandF.sav'
+MODEL_PATH = '../ML/model_RandF.sav'
 
 # Chart colors
 PIE_CHART_COLORS = ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
