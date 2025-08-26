@@ -1,13 +1,12 @@
 # Student Admission Prediction
 
 <p align="center">
-<img src="Frontend/assets/logo.jpg" width="200" height="170" alt="SAP Project Logo">
+<img src="WebApp/assets/logo.jpg" width="200" height="170" alt="SAP Project Logo">
 </p>
 
 # Project Idea
 This is a student project about predicting the chance of admission. For this project we are using Graduate Admission Dataset from Kaggle. We will use machine learning to analyze the data, find a model to predict the University Ranking and then visualize the result.
 
-  
 # Requirements and Preparation
 
 ## Required Libraries
@@ -55,19 +54,14 @@ pip install -r requirements.txt
 ### 4. Retrain Model (if needed)
 If you encounter model compatibility issues, retrain the model:
 ```bash
-cd Backend
-python retrain_model.py
+cd ML
+python retrain_model_modular.py
 ```
 
 ### 5. Start the Application
 ```bash
-cd Frontend
-
-# Run the original application
+cd WebApp
 python app.py
-
-# OR run the new modular application
-python app_refactored.py
 ```
 
 ### 6. Access the Application
@@ -76,58 +70,54 @@ Open your web browser and go to:
 http://127.0.0.1:8050/
 ```
 
-## Recent Updates and Fixes
+## Project Structure
 
-### ✅ Major Refactoring - Modular Design Implementation
-- **Complete Code Restructuring**: Refactored monolithic `app.py` into modular architecture
-- **Separation of Concerns**: Each component now has its own dedicated module
-- **Enhanced Maintainability**: Easy to modify, test, and extend individual components
-- **Professional Code Structure**: Following industry best practices and design patterns
-
-### ✅ New Modular Architecture
 ```
-Frontend/
-├── config/
-│   ├── __init__.py
-│   └── settings.py          # All configuration constants
-├── data/
-│   ├── __init__.py
-│   └── data_loader.py       # Data loading and preprocessing
-├── models/
-│   ├── __init__.py
-│   └── model_manager.py     # Model loading and predictions
-├── visualizations/
-│   ├── __init__.py
-│   └── charts.py           # All chart creation functions
-├── components/
-│   ├── __init__.py
-│   ├── header.py           # Header component
-│   ├── home_tab.py         # Home tab component
-│   ├── dataset_tab.py      # Dataset tab component
-│   ├── dashboard_tab.py    # Dashboard tab component
-│   ├── ml_tab.py          # Machine Learning tab component
-│   └── prediction_tab.py   # Prediction tab component
-├── callbacks/
-│   ├── __init__.py
-│   └── prediction_callback.py # Prediction callback logic
-├── app.py                  # Original monolithic application
-└── app_refactored.py       # New modular application
+StdAdmitPred/
+├── ML/                    # Machine Learning & Data Processing
+│   ├── config.py          # ML configuration settings
+│   ├── data_processor.py  # Data loading and preprocessing
+│   ├── model_trainer.py   # Model training and evaluation
+│   ├── retrain_model_modular.py  # Model retraining script
+│   ├── model_RandF.sav    # Trained model file
+│   └── Prediction.ipynb   # Jupyter notebook for model development
+├── WebApp/                # Dash Web Application
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── settings.py    # Application configuration
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── data_loader.py # Data loading and preprocessing
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── model_manager.py # Model loading and predictions
+│   ├── visualizations/
+│   │   ├── __init__.py
+│   │   └── charts.py      # Chart creation functions
+│   ├── components/
+│   │   ├── __init__.py
+│   │   ├── header.py      # Header component
+│   │   ├── home_tab.py    # Home tab component
+│   │   ├── dataset_tab.py # Dataset tab component
+│   │   ├── dashboard_tab.py # Dashboard tab component
+│   │   ├── ml_tab.py      # Machine Learning tab component
+│   │   └── prediction_tab.py # Prediction tab component
+│   ├── callbacks/
+│   │   ├── __init__.py
+│   │   └── prediction_callback.py # Prediction callback logic
+│   ├── assets/            # Static assets (images, CSS)
+│   ├── app.py             # Main application file
+│   └── Visualization.ipynb # Visualization development notebook
+├── Dataset/               # Data Files
+│   ├── admission_predict_V1.2.csv
+│   └── Admission_Predict_Ver1.1.csv
+├── requirements.txt       # Python dependencies
+├── .gitignore            # Git ignore file
+└── README.md             # This file
 ```
 
-### ✅ Compatibility Fixes
-- **Updated Dash imports**: Modernized from deprecated `dash_html_components` to `from dash import html, dcc, dash_table`
-- **Fixed Dash server**: Updated from deprecated `app.run_server()` to `app.run()`
-- **Model compatibility**: Retrained RandomForest model for scikit-learn 1.7.1 compatibility
-- **Added retraining script**: `Backend/retrain_model.py` for easy model updates
-- **Fixed dash_daq import**: Corrected import statement for Dash-DAQ components
+## Features
 
-### ✅ Project Structure
-- **Backend**: Machine learning model and training scripts
-- **Frontend**: Dash web application with interactive interface (now modular)
-- **Dataset**: Graduate admission data for training and visualization
-- **Requirements**: Comprehensive dependency management
-
-### ✅ Features
 - **Interactive Predictions**: Real-time admission probability calculation
 - **Data Visualizations**: Comprehensive charts and graphs
 - **Model Performance**: Feature importance and evaluation metrics
@@ -162,8 +152,8 @@ https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predic
 
 ### Project Architecture:
 - **Machine Learning Model**: RandomForestRegressor (78.53% accuracy)
-- **Backend**: Python with scikit-learn
-- **Frontend**: Dash/Plotly web application (modular design)
+- **ML Module**: Python with scikit-learn for model training and data processing
+- **WebApp Module**: Dash/Plotly web application with modular design
 - **Model Persistence**: Joblib for model saving/loading
 - **Code Organization**: Modular architecture with separation of concerns
 - **Error Handling**: Comprehensive logging and error management
@@ -205,39 +195,24 @@ https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predic
 ### Common Issues and Solutions:
 
 1. **Model Loading Error**: 
-   - Run `python Backend/retrain_model.py` to create a compatible model
+   - Run `python ML/retrain_model_modular.py` to create a compatible model
 
 2. **Import Errors**:
    - Ensure you're using the virtual environment
    - Install dependencies with `pip install -r requirements.txt`
 
-3. **Dash Compatibility Issues**:
-   - The app has been updated for modern Dash versions
-   - Uses `app.run()` instead of deprecated `app.run_server()`
-
-4. **Port Already in Use**:
+3. **Port Already in Use**:
    - Change the port in `app.py` or kill the existing process
 
-5. **Modular Application Issues**:
-   - Both `app.py` (original) and `app_refactored.py` (modular) are available
-   - Use `app_refactored.py` for the new modular version
-   - All functionality is identical between versions
-
-6. **Dash-DAQ Import Issues**:
-   - Fixed import statement: `import dash_daq as daq`
+4. **Dash-DAQ Import Issues**:
    - Ensure `dash-daq` is installed: `pip install dash-daq`
 
 ## Deployment
 
 ### Local Development:
 ```bash
-cd Frontend
-
-# Run original application
+cd WebApp
 python app.py
-
-# OR run modular application
-python app_refactored.py
 ```
 
 ### Production Deployment (Heroku):
@@ -280,5 +255,5 @@ This project is part of the Learning Analysis course (WS20/21) by the Datology G
 
 ---
 
-**Note**: This project has been updated for modern Python and Dash compatibility. The model has been retrained for scikit-learn 1.7.1+ compatibility. The codebase has been refactored into a modular architecture following industry best practices.
+**Note**: This project uses modern Python and Dash compatibility with a modular architecture following industry best practices.
 
